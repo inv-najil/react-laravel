@@ -8,12 +8,11 @@ import {
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { getStudentByID, updateStudent } from "../../api/authService";
+import { getTeacherById, updateTeacher } from "../../api/authService";
 
-export default function EditStudent() {
+export default function EditTeacher() {
     const { id } = useParams();
     const navigate = useNavigate();
-
     const {
         register,
         handleSubmit,
@@ -22,31 +21,31 @@ export default function EditStudent() {
     } = useForm();
 
     useEffect(() => {
-        getStudentByID(id)
+        getTeacherById(id)
             .then(res => {
                 reset(res.data);
             })
             .catch(err => {
-                console.error("Failed to fetch ", err);
-                alert("could not load student data");
-            });
+                console.error("Failed to fetch", err);
+                alert("Failed to fetch teacher");
+            })
     }, [id, reset]);
 
     const onSubmit = async (data) => {
         try {
-            await updateStudent(id, data);
-            alert("student Updated");
-            navigate("/admin/list-students");
+            await updateTeacher(id, data);
+            alert("Teacher updated");
+            navigate("/admin/list-teachers");
         } catch (err) {
-            console.error("update failed", err);
-            alert("Failed to update student");
+            console.error("Failed to update", err);
+            alert("Update failed");
         }
     };
     return (
         <Container maxWidth="sm">
             <Paper sx={{ p: 4, mt: 6 }}>
                 <Typography variant="h5" gutterBottom>
-                    Edit Student
+                    Edit Teacher
                 </Typography>
 
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -88,11 +87,11 @@ export default function EditStudent() {
 
                     <TextField
                         fullWidth
-                        label="Grade"
+                        label="Subject"
                         InputLabelProps={{ shrink: true }}
-                        {...register("class_grade", { required: "Grade is required" })}
-                        error={!!errors.class_grade}
-                        helperText={errors.class_grade?.message}
+                        {...register("subject_specialization", { required: "Subject is required" })}
+                        error={!!errors.subject_specialization}
+                        helperText={errors.subject_specialization?.message}
                         margin="normal"
                     />
 
@@ -110,7 +109,7 @@ export default function EditStudent() {
                     </TextField>
 
                     <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                        Update Student
+                        Update Teacher
                     </Button>
                 </form>
             </Paper>

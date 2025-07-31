@@ -28,6 +28,7 @@ const menuItemsByRole = {
         { label: "Regsiter Student", path: "/admin/register-student" },
         { label: "Regsiter Teacher", path: "/admin/register-teacher" },
         { label: "List Students", path: "/admin/list-students" },
+        { label: "List Teacher", path: "/admin/list-teachers" },
     ],
     teacher: [
         { lable: "Dashboard", path: "/teacher" },
