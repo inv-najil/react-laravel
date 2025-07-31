@@ -25,6 +25,7 @@ const drawerWidth = 240;
 const menuItemsByRole = {
     admin: [
         { label: "Dashboard", path: "/admin" },
+        { label: "Regsiter Student", path: "/admin/register-student" },
     ],
     teacher: [
         { lable: "Dashboard", path: "/teacher" },
