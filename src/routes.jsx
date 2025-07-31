@@ -10,6 +10,8 @@ import RegisterStudent from "./pages/admin/StudentRegister";
 import RegisterTeacher from "./pages/admin/TeacherRegister";
 import Students from "./pages/admin/ListStudents";
 import EditStudent from "./pages/admin/EditStudent";
+import Teachers from "./pages/admin/ListTeachers";
+import EditTeacher from "./pages/admin/EditTeachers";
 
 const router = createBrowserRouter([
     { path: "/login", element: <Login /> },
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
             { path: "register-teacher", element: <RegisterTeacher /> },
             { path: "list-students", element: <Students /> },
             { path: "students/edit/:id", element: <EditStudent /> },
+            { path: "list-teachers", element: <Teachers /> },
+            { path: "teachers/edit/:id", element: <EditTeacher /> },
 
         ]
     },
