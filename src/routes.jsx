@@ -3,9 +3,9 @@ import Login from "./pages/Login";
 import AdminLayout from "./layouts/AdminLayout";
 import StudentLayout from "./layouts/StudentLayout";
 import TeacherLayout from "./layouts/TeacherLayout";
-import AdminDashboard from "./admin/AdminDashboard";
-import StudentDashboard from "./student/StudentDashboard";
-import TeacherDashboard from "./teacher/TeacherDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import StudentDashboard from "./pages/student/StudentDashboard";
+import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 
 const router = createBrowserRouter([
     { path: "/login", element: <Login /> },
