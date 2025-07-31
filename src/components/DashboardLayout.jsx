@@ -16,7 +16,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getStoredUser } from "../utils/auth";
+import { getStoredUser, logoutUser } from "../utils/auth";
 import API from "../api/axios";
 import { logoutApi } from "../api/authService";
 
@@ -39,12 +39,12 @@ export default function DashboardLayout({ children }) {
     const handleLogout = async () => {
         try {
             await logoutApi();
-            localStorage.removeItem("user");
-            navigate("/login");
-        } catch (error) {
-            console.error("Logout failed", error);
+        } catch (e) {
+            console.error("Logout failed", e);
             alert("logout failed");
         }
+        logoutUser();
+        navigate("/login");
     };
     const [open, setOpen] = useState(false);
     const authData = getStoredUser();
