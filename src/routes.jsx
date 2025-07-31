@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import RegisterStudent from "./pages/admin/StudentRegister";
+import RegisterTeacher from "./pages/admin/TeacherRegister";
 
 const router = createBrowserRouter([
     { path: "/login", element: <Login /> },
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <AdminDashboard /> },
             { path: "register-student", element: <RegisterStudent /> },
+            { path: "register-teacher", element: <RegisterTeacher /> },
         ]
     },
     {

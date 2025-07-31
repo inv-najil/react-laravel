@@ -10,50 +10,35 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { registerAPI } from "../../api/authService";
 import { useNavigate } from "react-router-dom";
-import { getAllTeachers } from "../../api/authService";
-
-export default function RegisterStudent() {
+export default function RegisterTeacher() {
     const {
         register,
         handleSubmit,
         formState: { errors },
-        watch,
+        watch
     } = useForm();
-    const [teachers, setTeachers] = useState([]);
+    const password = watch("password")
     const navigate = useNavigate();
-    const password = watch("password");
-
-    useEffect(() => {
-        getAllTeachers()
-            .then((res) => {
-                setTeachers(res.data.data || []);
-            })
-            .catch((err) => {
-                console.error("Failed to fetch teachers", err);
-                setTeachers([]);
-            });
-    }, []);
-
 
     const onSubmit = async (data) => {
         try {
             const payload = {
                 ...data,
-                role: "student",
+                role: "teacher",
             };
             await registerAPI(payload);
-            alert("student Registerd successfully");
+            alert("Teacher registered successfully");
             navigate("/admin");
         } catch (err) {
-            alert("Failed to register student")
-            console.error("failed register", err);
+            alert("Failed to register teacher");
+            console.error(err);
         }
     };
     return (
         <Container maxWidth="sm">
             <Paper sx={{ p: 4, mt: 6 }}>
                 <Typography variant="h5" gutterBottom>
-                    Register Student
+                    Register Teacher
                 </Typography>
 
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -137,68 +122,35 @@ export default function RegisterStudent() {
 
                     <TextField
                         fullWidth
-                        label="Roll Number"
-                        {...register("roll_num", { required: "Roll number is required" })}
-                        error={!!errors.roll_num}
-                        helperText={errors.roll_num?.message}
+                        label="Employee Number"
+                        {...register("emp_id", { required: "EMP number is required" })}
+                        error={!!errors.emp_id}
+                        helperText={errors.emp_id?.message}
                         margin="normal"
                     />
 
                     <TextField
                         fullWidth
-                        label="Grade"
-                        {...register("class_grade", { required: "Grade is required" })}
-                        error={!!errors.class_grade}
-                        helperText={errors.class_grade?.message}
+                        label="Subject"
+                        {...register("subject_specialization", { required: "Subject is required" })}
+                        error={!!errors.subject_specialization}
+                        helperText={errors.subject_specialization?.message}
                         margin="normal"
                     />
 
+
                     <TextField
                         fullWidth
-                        label="Date of Birth"
+                        label="Date of Joining"
                         type="date"
                         InputLabelProps={{ shrink: true }}
-                        {...register("dob", { required: "Date of birth is required" })}
-                        error={!!errors.dob}
-                        helperText={errors.dob?.message}
-                        margin="normal"
-                    />
-
-                    <TextField
-                        fullWidth
-                        label="Admission Date"
-                        type="date"
-                        InputLabelProps={{ shrink: true }}
-                        {...register("admission_date", {
-                            required: "Admission date is required",
+                        {...register("date_of_joining", {
+                            required: " Date of joining is required",
                         })}
-                        error={!!errors.admission_date}
-                        helperText={errors.admission_date?.message}
+                        error={!!errors.date_of_joining}
+                        helperText={errors.date_of_joining?.message}
                         margin="normal"
                     />
-
-                    <TextField
-                        select
-                        fullWidth
-                        label="Assigned Teacher"
-                        {...register("teacher_id", { required: "Teacher is required" })}
-                        error={!!errors.teacher_id}
-                        helperText={errors.teacher_id?.message}
-                        margin="normal"
-                        defaultValue=""
-                    >
-                        {teachers.length === 0 ? (
-                            <MenuItem value="" disabled>No teachers found</MenuItem>
-                        ) : (
-                            teachers.map((teacher) => (
-                                <MenuItem key={teacher.id} value={teacher.id}>
-                                    {`${teacher.first_name || ""} - ${teacher.emp_id}`}
-                                </MenuItem>
-                            ))
-                        )}
-                    </TextField>
-
-
                     <TextField
                         select
                         fullWidth
@@ -214,7 +166,7 @@ export default function RegisterStudent() {
                     </TextField>
 
                     <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                        Register Student
+                        Register Teacher
                     </Button>
                 </form>
             </Paper>
