@@ -8,6 +8,8 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import RegisterStudent from "./pages/admin/StudentRegister";
 import RegisterTeacher from "./pages/admin/TeacherRegister";
+import Students from "./pages/admin/ListStudents";
+import EditStudent from "./pages/admin/EditStudent";
 
 const router = createBrowserRouter([
     { path: "/login", element: <Login /> },
@@ -18,6 +20,9 @@ const router = createBrowserRouter([
             { index: true, element: <AdminDashboard /> },
             { path: "register-student", element: <RegisterStudent /> },
             { path: "register-teacher", element: <RegisterTeacher /> },
+            { path: "list-students", element: <Students /> },
+            { path: "students/edit/:id", element: <EditStudent /> },
+
         ]
     },
     {
