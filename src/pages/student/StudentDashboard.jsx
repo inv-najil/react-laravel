@@ -1,6 +1,7 @@
 import {
   Typography,
-  Paper,
+  Card,
+  CardContent,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +13,7 @@ import { getStudentProfile } from "../../api/authService";
 import { useEffect, useState } from "react";
 
 export default function StudentDashboard() {
-  const [student, setStudent] = useState(null);
+  const [student, setStudent] = useState([]);
 
   useEffect(() => {
     getStudentProfile()
@@ -24,34 +25,38 @@ export default function StudentDashboard() {
         alert("Failed to fetch student profile");
       });
   }, []);
-
   return (
-    <TableContainer component={Paper} sx={{ overflowX: "auto", p: 2 }}>
-      {student && (
-        <Typography variant="h5" sx={{ mb: 3 }}>
-          Hi {student.first_name}
+    <Card sx={{ borderRadius: 3, boxShadow: 4, p: 2, backgroundColor: "#748DAE" }}>
+      <CardContent>
+        <Typography variant="h5" sx={{ mb: 3, color: "white" }}>
+          Hi Student, {student.first_name} {student.last_name}
         </Typography>
-      )}
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell><strong>Name</strong></TableCell>
-            <TableCell><strong>Roll Number</strong></TableCell>
-            <TableCell><strong>Email</strong></TableCell>
-            <TableCell><strong>Class</strong></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {student && (
-            <TableRow key={student.id}>
-              <TableCell>{student.first_name} {student.last_name}</TableCell>
-              <TableCell>{student.roll_num}</TableCell>
-              <TableCell>{student.email}</TableCell>
-              <TableCell>{student.class_grade}</TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        <TableContainer>
+          <Table>
+            <TableHead sx={{ backgroundColor: "#9ECAD6" }}>
+              <TableRow>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Roll Number</TableCell>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Email</TableCell>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Class</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow
+                hover
+                sx={{
+                  "&:hover": { backgroundColor: "#f0f4ff" },
+                }}
+              >
+                <TableCell>{student.first_name} {student.last_name}</TableCell>
+                <TableCell>{student.roll_num}</TableCell>
+                <TableCell>{student.email}</TableCell>
+                <TableCell>{student.class_grade}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </CardContent>
+    </Card>
   );
 }
