@@ -1,6 +1,7 @@
 import {
   Typography,
-  Paper,
+  Card,
+  CardContent,
   Table,
   TableBody,
   TableCell,
@@ -26,32 +27,37 @@ export default function TeacherDashboard() {
       })
   }, [])
   return (
-    <TableContainer component={Paper} sx={{ overflowX: "auto", p: 2 }}>
-      {teacher && (
-        <Typography variant="h5" sx={{ mb: 3 }}>
-          Hi Teacher,{teacher.first_name} {teacher.last_name}
+    <Card sx={{ borderRadius: 3, boxShadow: 4, p: 2, backgroundColor: "#748DAE" }}>
+      <CardContent>
+        <Typography variant="h5" sx={{ mb: 3, color: "white" }}>
+          Hi Teacher, {teacher.first_name} {teacher.last_name}
         </Typography>
-      )}
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell><strong>Name</strong></TableCell>
-            <TableCell><strong>Emp Number</strong></TableCell>
-            <TableCell><strong>Email</strong></TableCell>
-            <TableCell><strong>Subject</strong></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {teacher && (
-            <TableRow key={teacher.id}>
-              <TableCell>{teacher.first_name} {teacher.last_name}</TableCell>
-              <TableCell>{teacher.emp_id}</TableCell>
-              <TableCell>{teacher.email}</TableCell>
-              <TableCell>{teacher.subject_specialization}</TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        <TableContainer>
+          <Table>
+            <TableHead sx={{ backgroundColor: "#9ECAD6" }}>
+              <TableRow>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Emp Number</TableCell>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Email</TableCell>
+                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Subject</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow
+                hover
+                sx={{
+                  "&:hover": { backgroundColor: "#f0f4ff" },
+                }}
+              >
+                <TableCell>{teacher.first_name} {teacher.last_name}</TableCell>
+                <TableCell>{teacher.emp_id}</TableCell>
+                <TableCell>{teacher.email}</TableCell>
+                <TableCell>{teacher.subject_specialization}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </CardContent>
+    </Card>
   );
 }
