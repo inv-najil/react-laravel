@@ -31,7 +31,8 @@ const menuItemsByRole = {
         { label: "List Teacher", path: "/admin/list-teachers" },
     ],
     teacher: [
-        { lable: "Dashboard", path: "/teacher" },
+        { label: "Dashboard", path: "/teacher" },
+        { label: "List students", path: "/teacher/list-students" },
     ],
     student: [
         { label: "Dashboard", path: "/student" }
