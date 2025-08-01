@@ -56,3 +56,7 @@ export const deleteTeacher = (id) => {
 export const getTeacherStudents = (teacherId) => {
     return API.get(`/teachers/${teacherId}/students`);
 };
+
+export const getTeacherProfile = () => {
+    return API.get("/teacher/profile");
+};
