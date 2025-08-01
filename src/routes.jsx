@@ -12,6 +12,8 @@ import Students from "./pages/admin/ListStudents";
 import EditStudent from "./pages/admin/EditStudent";
 import Teachers from "./pages/admin/ListTeachers";
 import EditTeacher from "./pages/admin/EditTeachers";
+import AssingnedStudent from "./pages/teacher/AssingnedStudents";
+import TeacherEditStudent from "./pages/teacher/TeacherEditStudent";
 
 const router = createBrowserRouter([
     { path: "/login", element: <Login /> },
@@ -33,7 +35,9 @@ const router = createBrowserRouter([
         path: "/teacher",
         element: <TeacherLayout />,
         children: [
-            { index: true, element: <TeacherDashboard /> }
+            { index: true, element: <TeacherDashboard /> },
+            { path: "list-students", element: <AssingnedStudent /> },
+            { path: "students/edit/:id", element: <TeacherEditStudent /> },
         ]
 
     },
