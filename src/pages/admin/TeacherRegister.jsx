@@ -19,6 +19,7 @@ export default function RegisterTeacher() {
     } = useForm();
     const password = watch("password")
     const navigate = useNavigate();
+    const [serverError, setServerError] = useState({});
 
     const onSubmit = async (data) => {
         try {
@@ -28,10 +29,18 @@ export default function RegisterTeacher() {
             };
             await registerAPI(payload);
             alert("Teacher registered successfully");
+            setServerError({});
             navigate("/admin");
         } catch (err) {
-            alert("Failed to register teacher");
-            console.error(err);
+            const message = err.response?.data?.message?.toLowerCase();
+            if (message?.includes("email")) {
+                setServerError({ email: err.response.data.message });
+            } else if (message?.includes("emp_id")) {
+                setServerError({ emp_id: err.response.data.message });
+            } else {
+                setServerError({});
+                alert("Something went wrong");
+            }
         }
     };
     return (
@@ -53,7 +62,7 @@ export default function RegisterTeacher() {
                             },
                         })}
                         error={!!errors.email}
-                        helperText={errors.email?.message}
+                        helperText={errors.email?.message || serverError.email}
                         margin="normal"
                     />
 
@@ -137,7 +146,7 @@ export default function RegisterTeacher() {
                         label="Employee Number"
                         {...register("emp_id", { required: "EMP number is required" })}
                         error={!!errors.emp_id}
-                        helperText={errors.emp_id?.message}
+                        helperText={errors.emp_id?.message || serverError.emp_id}
                         margin="normal"
                     />
 
