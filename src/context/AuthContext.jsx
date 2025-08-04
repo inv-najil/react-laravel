@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify({ user, access: token }));
   };
 
-  const logout = async () => {
+  const logout = () => {
     logoutUser();
     setUser(null);
     setToken(null);

@@ -14,12 +14,15 @@ import Teachers from "./pages/admin/ListTeachers";
 import EditTeacher from "./pages/admin/EditTeachers";
 import AssingnedStudent from "./pages/teacher/AssingnedStudents";
 import TeacherEditStudent from "./pages/teacher/TeacherEditStudent";
+import ProtectedRoute from "./components/ProtectedRoutes";
 
 const router = createBrowserRouter([
     { path: "/login", element: <Login /> },
     {
         path: "/admin",
-        element: <AdminLayout />,
+        element: <ProtectedRoute allowedRole={"admin"}>
+            <AdminLayout />
+        </ProtectedRoute>,
         children: [
             { index: true, element: <AdminDashboard /> },
             { path: "register-student", element: <RegisterStudent /> },
@@ -33,7 +36,9 @@ const router = createBrowserRouter([
     },
     {
         path: "/teacher",
-        element: <TeacherLayout />,
+        element: <ProtectedRoute allowedRole={"teacher"}>
+            <TeacherLayout />
+        </ProtectedRoute>,
         children: [
             { index: true, element: <TeacherDashboard /> },
             { path: "list-students", element: <AssingnedStudent /> },
@@ -43,7 +48,9 @@ const router = createBrowserRouter([
     },
     {
         path: "/student",
-        element: <StudentLayout />,
+        element: <ProtectedRoute allowedRole={"student"}>
+            <StudentLayout />
+        </ProtectedRoute>,
         children: [
             { index: true, element: <StudentDashboard /> }
         ]

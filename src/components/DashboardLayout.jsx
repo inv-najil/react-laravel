@@ -19,6 +19,8 @@ import { useState } from "react";
 import { getStoredUser, logoutUser } from "../utils/auth";
 import API from "../api/axios";
 import { logoutApi } from "../api/authService";
+import { useAuth } from "../context/AuthContext";
+
 
 const drawerWidth = 240;
 
@@ -41,6 +43,7 @@ const menuItemsByRole = {
 
 export default function DashboardLayout({ children }) {
     const navigate = useNavigate()
+    const { logout } = useAuth();
     const handleLogout = async () => {
         try {
             await logoutApi();
@@ -48,7 +51,7 @@ export default function DashboardLayout({ children }) {
             console.error("Logout failed", e);
             alert("logout failed");
         }
-        logoutUser();
+        logout();
         navigate("/login");
     };
     const [open, setOpen] = useState(false);
