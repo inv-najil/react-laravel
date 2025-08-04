@@ -50,7 +50,7 @@ export default function RegisterStudent() {
             const message = err.response?.data?.message?.toLowerCase();
             if (message?.includes("email")) {
                 setServerError({ email: err.response.data.message });
-            } else if (message?.includes("roll_num")) {
+            } else if (message?.includes("roll")) {
                 setServerError({ roll_num: err.response.data.message });
             } else {
                 setServerError({});
@@ -76,7 +76,7 @@ export default function RegisterStudent() {
                                 message: "Invalid email format",
                             },
                         })}
-                        error={!!errors.email}
+                        error={!!errors.email || !!serverError.email}
                         helperText={errors.email?.message || serverError.email}
                         margin="normal"
                     />
@@ -160,7 +160,7 @@ export default function RegisterStudent() {
                         fullWidth
                         label="Roll Number"
                         {...register("roll_num", { required: "Roll number is required" })}
-                        error={!!errors.roll_num}
+                        error={!!errors.roll_num || serverError.roll_num}
                         helperText={errors.roll_num?.message || serverError.roll_num}
                         margin="normal"
                     />
