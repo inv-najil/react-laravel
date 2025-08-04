@@ -22,6 +22,7 @@ export default function RegisterStudent() {
     const [teachers, setTeachers] = useState([]);
     const navigate = useNavigate();
     const password = watch("password");
+    const [serverError, setServerError] = useState({});
 
     useEffect(() => {
         getAllTeachers()
@@ -43,10 +44,18 @@ export default function RegisterStudent() {
             };
             await registerAPI(payload);
             alert("student Registerd successfully");
+            setServerError({});
             navigate("/admin");
         } catch (err) {
-            alert("Failed to register student")
-            console.error("failed register", err);
+            const message = err.response?.data?.message?.toLowerCase();
+            if (message?.includes("email")) {
+                setServerError({ email: err.response.data.message });
+            } else if (message?.includes("roll_num")) {
+                setServerError({ roll_num: err.response.data.message });
+            } else {
+                setServerError({});
+                alert("Something went wrong");
+            }
         }
     };
     return (
@@ -68,7 +77,7 @@ export default function RegisterStudent() {
                             },
                         })}
                         error={!!errors.email}
-                        helperText={errors.email?.message}
+                        helperText={errors.email?.message || serverError.email}
                         margin="normal"
                     />
 
@@ -152,7 +161,7 @@ export default function RegisterStudent() {
                         label="Roll Number"
                         {...register("roll_num", { required: "Roll number is required" })}
                         error={!!errors.roll_num}
-                        helperText={errors.roll_num?.message}
+                        helperText={errors.roll_num?.message || serverError.roll_num}
                         margin="normal"
                     />
 
