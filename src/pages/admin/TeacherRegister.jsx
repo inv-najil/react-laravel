@@ -35,7 +35,7 @@ export default function RegisterTeacher() {
             const message = err.response?.data?.message?.toLowerCase();
             if (message?.includes("email")) {
                 setServerError({ email: err.response.data.message });
-            } else if (message?.includes("emp_id")) {
+            } else if (message?.includes("emp")) {
                 setServerError({ emp_id: err.response.data.message });
             } else {
                 setServerError({});
@@ -61,7 +61,7 @@ export default function RegisterTeacher() {
                                 message: "Invalid email format",
                             },
                         })}
-                        error={!!errors.email}
+                        error={!!errors.email || !!serverError.email}
                         helperText={errors.email?.message || serverError.email}
                         margin="normal"
                     />
@@ -145,7 +145,7 @@ export default function RegisterTeacher() {
                         fullWidth
                         label="Employee Number"
                         {...register("emp_id", { required: "EMP number is required" })}
-                        error={!!errors.emp_id}
+                        error={!!errors.emp_id || !!serverError.emp_id}
                         helperText={errors.emp_id?.message || serverError.emp_id}
                         margin="normal"
                     />
