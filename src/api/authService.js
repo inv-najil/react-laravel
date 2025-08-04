@@ -60,3 +60,7 @@ export const getTeacherStudents = (teacherId) => {
 export const getTeacherProfile = () => {
     return API.get("/teacher/profile");
 };
+
+export const getTotalCount = () => {
+    return API.get("/admin/dashboard");
+};
