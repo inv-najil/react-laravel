@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Container, Paper } from "@mui/material";
 import { loginAPI } from "../api/authService";
 import { getStoredUser } from "../utils/auth";
-
+import { useAuth } from "../context/AuthContext";
 export default function Login() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const {
         register,
         handleSubmit,
@@ -15,11 +16,8 @@ export default function Login() {
     const onSubmit = async (formData) => {
         try {
             const response = await loginAPI(formData);
-            localStorage.setItem("user", JSON.stringify({
-                access: response.data.token,
-                user: response.data.user,
-            }));
-            const { role } = response.data.user;
+            const { token, user, role } = response.data;
+            login({ user, token });
             navigate(`/${role}`);
         } catch (err) {
             alert("Invalid email or password");
@@ -36,20 +34,33 @@ export default function Login() {
                     <TextField
                         fullWidth
                         label="Email"
-                        margin="normal"
-                        {...register("email", { required: "Email is required" })}
+                        {...register("email", {
+                            required: "Email is required",
+                            pattern: {
+                                value: /^[^@\s]+@[^@\s]+\.[^@\s]+$/,
+                                message: "Invalid email format",
+                            },
+                        })}
                         error={!!errors.email}
                         helperText={errors.email?.message}
+                        margin="normal"
                     />
+
 
                     <TextField
                         fullWidth
                         label="Password"
                         type="password"
-                        margin="normal"
-                        {...register("password", { required: "Password is required" })}
+                        {...register("password", {
+                            required: "Password is required",
+                            minLength: {
+                                value: 6,
+                                message: "Password must be at least 6 characters",
+                            },
+                        })}
                         error={!!errors.password}
                         helperText={errors.password?.message}
+                        margin="normal"
                     />
 
                     <Button
