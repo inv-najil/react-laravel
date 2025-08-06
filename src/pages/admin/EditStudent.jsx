@@ -53,7 +53,11 @@ export default function EditStudent() {
                     <TextField
                         fullWidth
                         label="First Name"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("first_name", { required: "First name is required" })}
                         error={!!errors.first_name}
                         helperText={errors.first_name?.message}
@@ -63,7 +67,11 @@ export default function EditStudent() {
                     <TextField
                         fullWidth
                         label="Last Name"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("last_name", { required: "Last name is required" })}
                         error={!!errors.last_name}
                         helperText={errors.last_name?.message}
@@ -73,7 +81,11 @@ export default function EditStudent() {
                     <TextField
                         fullWidth
                         label="Phone"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("phone", {
                             required: "Phone is required",
                             pattern: {
@@ -89,7 +101,11 @@ export default function EditStudent() {
                     <TextField
                         fullWidth
                         label="Grade"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("class_grade", { required: "Grade is required" })}
                         error={!!errors.class_grade}
                         helperText={errors.class_grade?.message}
@@ -100,7 +116,11 @@ export default function EditStudent() {
                         select
                         fullWidth
                         label="Status"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("status", { required: "Status is required" })}
                         margin="normal"
                         defaultValue="active"

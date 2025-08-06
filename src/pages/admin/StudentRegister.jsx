@@ -178,7 +178,11 @@ export default function RegisterStudent() {
                         fullWidth
                         label="Date of Birth"
                         type="date"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("dob", { required: "Date of birth is required" })}
                         error={!!errors.dob}
                         helperText={errors.dob?.message}
@@ -189,7 +193,11 @@ export default function RegisterStudent() {
                         fullWidth
                         label="Admission Date"
                         type="date"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("admission_date", {
                             required: "Admission date is required",
                         })}

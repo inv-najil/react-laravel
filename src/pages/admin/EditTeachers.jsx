@@ -52,7 +52,11 @@ export default function EditTeacher() {
                     <TextField
                         fullWidth
                         label="First Name"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("first_name", { required: "First name is required" })}
                         error={!!errors.first_name}
                         helperText={errors.first_name?.message}
@@ -62,7 +66,11 @@ export default function EditTeacher() {
                     <TextField
                         fullWidth
                         label="Last Name"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("last_name", { required: "Last name is required" })}
                         error={!!errors.last_name}
                         helperText={errors.last_name?.message}
@@ -72,7 +80,11 @@ export default function EditTeacher() {
                     <TextField
                         fullWidth
                         label="Phone"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("phone", {
                             required: "Phone is required",
                             pattern: {
@@ -88,7 +100,11 @@ export default function EditTeacher() {
                     <TextField
                         fullWidth
                         label="Subject"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("subject_specialization", { required: "Subject is required" })}
                         error={!!errors.subject_specialization}
                         helperText={errors.subject_specialization?.message}
@@ -99,7 +115,11 @@ export default function EditTeacher() {
                         select
                         fullWidth
                         label="Status"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("status", { required: "Status is required" })}
                         margin="normal"
                         defaultValue="active"
