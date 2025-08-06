@@ -164,7 +164,11 @@ export default function RegisterTeacher() {
                         fullWidth
                         label="Date of Joining"
                         type="date"
-                        InputLabelProps={{ shrink: true }}
+                        slotProps={{
+                            inputLabel: {
+                                shrink: true,
+                            }
+                        }}
                         {...register("date_of_joining", {
                             required: " Date of joining is required",
                         })}

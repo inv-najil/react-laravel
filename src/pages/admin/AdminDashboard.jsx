@@ -13,7 +13,6 @@ export default function AdminDashboard() {
     getTotalCount()
       .then(res => {
         setCount(res.data);
-        console.log(res.data);
       })
       .catch(err => {
         console.error("Error in fetching", err);
