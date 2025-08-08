@@ -20,7 +20,12 @@ export default function AdminDashboard() {
       })
   }, [])
   return (
-    <Grid container spacing={3} sx={{ minHeight: "100vh" }}>
+    <Grid container
+      direction="row"
+      spacing={3}
+      sx={{
+        justifyContent: "flex-start",
+      }}>
       <Grid item xs={6}>
         <Card sx={{ backgroundColor: "#748DAE", boxShadow: 3, borderRadius: 3, color: "white" }}>
           <CardContent>
