@@ -15,7 +15,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteStudent, getTeacherById, getTeacherProfile, getTeacherStudents } from "../../api/authService";
+import { deleteStudent, getTeacherProfile, getTeacherStudents } from "../../api/authService";
 
 export default function AssingnedStudent() {
     const navigate = useNavigate();
@@ -24,11 +24,8 @@ export default function AssingnedStudent() {
         const fetchData = async () => {
             try {
                 const res = await getTeacherProfile();
-                console.log(res);
                 const teacherId = res.data.id;
-                console.log(teacherId);
                 const studentres = await getTeacherStudents(teacherId);
-                console.log(studentres.data.data);
                 setStudents(studentres.data.data);
             }
             catch (error) {
@@ -53,34 +50,35 @@ export default function AssingnedStudent() {
 
 
     return (
-        <Card sx={{ borderRadius: 3, boxShadow: 4, backgroundColor: "#748DAE" }}>
+        <Card sx={{ borderRadius: 3, boxShadow: 4, backgroundColor: "#263238" }}>
             <CardContent>
+                <Typography variant="h4" sx={{ color: "#ff9800", fontWeight: "bold" }} gutterBottom>
+                    Students
+                </Typography>
                 <TableContainer>
                     <Table>
-                        <TableHead sx={{ backgroundColor: "#9ECAD6" }}>
+                        <TableHead>
                             <TableRow>
-                                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
-                                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Roll Number</TableCell>
-                                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Class</TableCell>
-                                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Actions</TableCell>
+                                <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Name</TableCell>
+                                <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Roll Number</TableCell>
+                                <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Class</TableCell>
+                                <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Actions</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {students.map(student => (
-                                <TableRow key={student.id} hover sx={{
-                                    "&:hover": { backgroundColor: "#f0f4ff" },
-                                }}>
-                                    <TableCell sx={{ color: "white" }}>{student.first_name} {student.last_name}</TableCell>
-                                    <TableCell sx={{ color: "white" }}>{student.roll_num}</TableCell>
-                                    <TableCell sx={{ color: "white" }}>{student.class_grade}</TableCell>
+                                <TableRow key={student.id}>
+                                    <TableCell sx={{ color: "#eceff1" }}>{student.first_name} {student.last_name}</TableCell>
+                                    <TableCell sx={{ color: "#eceff1" }}>{student.roll_num}</TableCell>
+                                    <TableCell sx={{ color: "#eceff1" }}>{student.class_grade}</TableCell>
                                     <TableCell>
                                         <Tooltip title="edit">
-                                            <IconButton onClick={() => { navigate(`/teacher/students/edit/${student.id}`) }}>
+                                            <IconButton onClick={() => { navigate(`/teacher/students/edit/${student.id}`) }} sx={{ color: "#eceff1" }}>
                                                 <EditIcon />
                                             </IconButton>
                                         </Tooltip>
                                         <Tooltip title="delete">
-                                            <IconButton onClick={() => { handleDelete(student.id) }}>
+                                            <IconButton onClick={() => { handleDelete(student.id) }} sx={{ color: "#eceff1" }}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </Tooltip>

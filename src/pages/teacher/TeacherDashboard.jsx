@@ -2,12 +2,6 @@ import {
   Typography,
   Card,
   CardContent,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getTeacherProfile } from "../../api/authService";
@@ -27,36 +21,29 @@ export default function TeacherDashboard() {
       })
   }, [])
   return (
-    <Card sx={{ borderRadius: 3, boxShadow: 4, p: 2, backgroundColor: "#748DAE" }}>
+    <Card sx={{ borderRadius: 3, boxShadow: 4, p: 2, backgroundColor: "#263238" }}>
       <CardContent>
-        <Typography variant="h5" sx={{ mb: 3, color: "white" }}>
+        <Typography variant="h5" sx={{ mb: 3, color: "#eceff1", fontWeight: "bold" }}>
           Hi Teacher, {teacher.first_name} {teacher.last_name}
         </Typography>
-        <TableContainer>
-          <Table>
-            <TableHead sx={{ backgroundColor: "#9ECAD6" }}>
-              <TableRow>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Emp Number</TableCell>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Email</TableCell>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Subject</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow
-                hover
-                sx={{
-                  "&:hover": { backgroundColor: "#f0f4ff" },
-                }}
-              >
-                <TableCell>{teacher.first_name} {teacher.last_name}</TableCell>
-                <TableCell>{teacher.emp_id}</TableCell>
-                <TableCell>{teacher.email}</TableCell>
-                <TableCell>{teacher.subject_specialization}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Typography variant="body2" sx={{ mt: 3, color: "#ff9800", fontWeight: "bold" }}>
+          Email :
+        </Typography>
+        <Typography variant="subtitle1" sx={{ color: "#eceff1" }}>
+          {teacher.email}
+        </Typography>
+        <Typography variant="body2" sx={{ mt: 3, color: "#ff9800", fontWeight: "bold" }}>
+          Employee ID :
+        </Typography>
+        <Typography variant="subtitle1" sx={{ color: "#eceff1" }}>
+          {teacher.emp_id}
+        </Typography>
+        <Typography variant="body2" sx={{ mt: 3, color: "#ff9800", fontWeight: "bold" }}>
+          Subject :
+        </Typography>
+        <Typography variant="subtitle1" sx={{ color: "#eceff1" }}>
+          {teacher.subject_specialization}
+        </Typography>
       </CardContent>
     </Card>
   );

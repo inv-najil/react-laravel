@@ -3,7 +3,8 @@ import {
     TextField,
     Button,
     Paper,
-    Typography
+    Typography,
+    Grid
 } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -43,75 +44,104 @@ export default function TeacherEditStudent() {
         }
     };
     return (
-        <Container maxWidth="sm">
-            <Paper sx={{ p: 4, mt: 6 }}>
-                <Typography variant="h5" gutterBottom>
-                    Edit Student
-                </Typography>
-
+        <Container maxWidth="md" >
+            <Typography variant="h4" sx={{ color: "#263238", fontWeight: "bold" }} gutterBottom>
+                Edit Student
+            </Typography>
+            <Paper sx={{ p: 4, }}>
                 <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                    <TextField
-                        fullWidth
-                        label="First Name"
-                        InputLabelProps={{ shrink: true }}
-                        {...register("first_name", { required: "First name is required" })}
-                        error={!!errors.first_name}
-                        helperText={errors.first_name?.message}
-                        margin="normal"
-                    />
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="First Name"
+                                slotProps={{
+                                    inputLabel: {
+                                        shrink: true,
+                                    }
+                                }}
+                                {...register("first_name", { required: "First name is required" })}
+                                error={!!errors.first_name}
+                                helperText={errors.first_name?.message}
+                                margin="normal"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Last Name"
+                                slotProps={{
+                                    inputLabel: {
+                                        shrink: true,
+                                    }
+                                }}
+                                {...register("last_name", { required: "Last name is required" })}
+                                error={!!errors.last_name}
+                                helperText={errors.last_name?.message}
+                                margin="normal"
+                            />
+                        </Grid>
 
-                    <TextField
-                        fullWidth
-                        label="Last Name"
-                        InputLabelProps={{ shrink: true }}
-                        {...register("last_name", { required: "Last name is required" })}
-                        error={!!errors.last_name}
-                        helperText={errors.last_name?.message}
-                        margin="normal"
-                    />
-
-                    <TextField
-                        fullWidth
-                        label="Phone"
-                        InputLabelProps={{ shrink: true }}
-                        {...register("phone", {
-                            required: "Phone is required",
-                            pattern: {
-                                value: /^[0-9]{10}$/,
-                                message: "Phone must be 10 digits",
-                            },
-                        })}
-                        error={!!errors.phone}
-                        helperText={errors.phone?.message}
-                        margin="normal"
-                    />
-
-                    <TextField
-                        fullWidth
-                        label="Grade"
-                        InputLabelProps={{ shrink: true }}
-                        {...register("class_grade", { required: "Grade is required" })}
-                        error={!!errors.class_grade}
-                        helperText={errors.class_grade?.message}
-                        margin="normal"
-                    />
-
-                    <TextField
-                        select
-                        fullWidth
-                        label="Status"
-                        InputLabelProps={{ shrink: true }}
-                        {...register("status", { required: "Status is required" })}
-                        margin="normal"
-                        defaultValue="active"
-                    >
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </TextField>
-
-                    <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                        Update Student
-                    </Button>
+                        <Grid xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Phone"
+                                slotProps={{
+                                    inputLabel: {
+                                        shrink: true,
+                                    }
+                                }}
+                                {...register("phone", {
+                                    required: "Phone is required",
+                                    pattern: {
+                                        value: /^[0-9]{10}$/,
+                                        message: "Phone must be 10 digits",
+                                    },
+                                })}
+                                error={!!errors.phone}
+                                helperText={errors.phone?.message}
+                                margin="normal"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Grade"
+                                slotProps={{
+                                    inputLabel: {
+                                        shrink: true,
+                                    }
+                                }}
+                                {...register("class_grade", { required: "Grade is required" })}
+                                error={!!errors.class_grade}
+                                helperText={errors.class_grade?.message}
+                                margin="normal"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                select
+                                fullWidth
+                                label="Status"
+                                slotProps={{
+                                    inputLabel: {
+                                        shrink: true,
+                                    }
+                                }}
+                                {...register("status", { required: "Status is required" })}
+                                margin="normal"
+                                defaultValue="active"
+                            >
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+                                Update Student
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </form>
             </Paper>
         </Container>
