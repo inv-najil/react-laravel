@@ -16,7 +16,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { NavLink,  useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { getStoredUser, logoutUser } from "../utils/auth";
+import { getStoredUser } from "../utils/auth";
 import { logoutApi } from "../api/authService";
 import { useAuth } from "../context/AuthContext";
 
