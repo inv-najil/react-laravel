@@ -26,36 +26,29 @@ export default function StudentDashboard() {
       });
   }, []);
   return (
-    <Card sx={{ borderRadius: 3, boxShadow: 4, p: 2, backgroundColor: "#748DAE" }}>
+    <Card sx={{ borderRadius: 3, boxShadow: 4, p: 2, backgroundColor: "#263238" }}>
       <CardContent>
-        <Typography variant="h5" sx={{ mb: 3, color: "white" }}>
+        <Typography variant="h5" sx={{ mb: 3, color: "#eceff1" }}>
           Hi Student, {student.first_name} {student.last_name}
         </Typography>
-        <TableContainer>
-          <Table>
-            <TableHead sx={{ backgroundColor: "#9ECAD6" }}>
-              <TableRow>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Name</TableCell>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Roll Number</TableCell>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Email</TableCell>
-                <TableCell sx={{ color: "black", fontWeight: "bold" }}>Class</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow
-                hover
-                sx={{
-                  "&:hover": { backgroundColor: "#f0f4ff" },
-                }}
-              >
-                <TableCell>{student.first_name} {student.last_name}</TableCell>
-                <TableCell>{student.roll_num}</TableCell>
-                <TableCell>{student.email}</TableCell>
-                <TableCell>{student.class_grade}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <Typography variant="body1" sx={{ mt: 3, color: "#ff9800", fontWeight: "bold" }}>
+          Email :
+        </Typography>
+        <Typography variant="subtitle1" sx={{ mb: 3, color: "#eceff1" }}>
+          {student.email}
+        </Typography>
+        <Typography variant="body1" sx={{ mt: 3, color: "#ff9800", fontWeight: "bold" }}>
+          Roll Number :
+        </Typography>
+        <Typography variant="subtitle1" sx={{ mb: 3, color: "#eceff1" }}>
+          {student.roll_num}
+        </Typography>
+        <Typography variant="body1" sx={{ mt: 3, color: "#ff9800", fontWeight: "bold" }}>
+          Class :
+        </Typography>
+        <Typography variant="subtitle1" sx={{ mb: 3, color: "#eceff1" }}>
+          {student.class_grade}
+        </Typography>
       </CardContent>
     </Card>
   );
