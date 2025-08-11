@@ -90,7 +90,6 @@ export default function AssingnedStudent() {
                     </Table>
                 </TableContainer>
             </CardContent>
-
         </Card>
     )
 }

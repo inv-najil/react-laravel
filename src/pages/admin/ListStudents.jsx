@@ -5,7 +5,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper,
     Box,
     Typography,
     Pagination,
@@ -59,38 +58,38 @@ export default function Students() {
     const totalPages = Math.ceil(totalCount / pageSize);
     return (
         <Box>
-            <Typography variant="h5" sx={{ mb: 2 }}>
+            <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold", color: "#ff9800" }}>
                 Students List
             </Typography>
 
-            <TableContainer component={Paper} sx={{ overflowX: "auto" }}>
+            <TableContainer  sx={{ backgroundColor: "#263238", overflowX: "auto" }}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell><strong>First Name</strong></TableCell>
-                            <TableCell><strong>Last Name</strong></TableCell>
-                            <TableCell><strong>Roll No</strong></TableCell>
-                            <TableCell><strong>Email</strong></TableCell>
-                            <TableCell><strong>Teacher ID</strong></TableCell>
-                            <TableCell><strong>Actions</strong></TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>First Name</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Last Name</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Roll No</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Email</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Teacher ID</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {students.map(student => (
                             <TableRow key={student.id}>
-                                <TableCell>{student.first_name}</TableCell>
-                                <TableCell>{student.last_name}</TableCell>
-                                <TableCell>{student.roll_num}</TableCell>
-                                <TableCell>{student.email}</TableCell>
-                                <TableCell>{student.teacher_id}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.first_name}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.last_name}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.roll_num}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.email}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.teacher_id}</TableCell>
                                 <TableCell>
                                     <Tooltip title="Edit">
-                                        <IconButton onClick={() => navigate(`/admin/students/edit/${student.id}`)}>
+                                        <IconButton onClick={() => navigate(`/admin/students/edit/${student.id}`)} sx={{ color: "#eceff1" }}>
                                             <EditIcon />
                                         </IconButton>
                                     </Tooltip>
                                     <Tooltip title="Delete">
-                                        <IconButton onClick={() => handleDelete(student.id)}>
+                                        <IconButton onClick={() => handleDelete(student.id)} sx={{ color: "#eceff1" }}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </Tooltip>

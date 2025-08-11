@@ -14,10 +14,9 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink,  useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getStoredUser, logoutUser } from "../utils/auth";
-import API from "../api/axios";
 import { logoutApi } from "../api/authService";
 import { useAuth } from "../context/AuthContext";
 
@@ -83,7 +82,7 @@ export default function DashboardLayout({ children }) {
                     >
                         {open ? <ChevronLeftIcon /> : <MenuIcon />}
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography variant="h6" >
                         School Management System
                     </Typography>
                 </Toolbar>
@@ -109,13 +108,13 @@ export default function DashboardLayout({ children }) {
                 <Toolbar />
                 <List>
                     {menuItems.map((item) => (
-                        <ListItem key={item.path} disablePadding>
+                        <ListItem key={item.path}>
                             <ListItemButton component={NavLink} to={item.path}>
                                 <ListItemText primary={item.label} />
                             </ListItemButton>
                         </ListItem>
                     ))}
-                    <ListItem disablePadding>
+                    <ListItem>
                         <ListItemButton onClick={handleLogout}>
                             <LogoutIcon sx={{ mr: 1 }} />
                             <ListItemText primary="Logout"></ListItemText>
