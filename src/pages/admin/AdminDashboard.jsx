@@ -27,18 +27,18 @@ export default function AdminDashboard() {
         justifyContent: "flex-start",
       }}>
       <Grid item xs={6}>
-        <Card sx={{ backgroundColor: "#748DAE", boxShadow: 3, borderRadius: 3, color: "white" }}>
+        <Card sx={{ backgroundColor: "#263238", boxShadow: 3, borderRadius: 3 }}>
           <CardContent>
-            <Typography variant="h6">Total Teacher</Typography>
-            <Typography variant="h4">{count.teachers}</Typography>
+            <Typography variant="h6" sx={{ color: "#ff9800" }}>Total Teacher</Typography>
+            <Typography variant="h4" sx={{ color: "#eceff1" }}>{count.teachers}</Typography>
           </CardContent>
         </Card>
       </Grid>
       <Grid item xs={6}>
-        <Card sx={{ backgroundColor: "#748DAE", boxShadow: 3, borderRadius: 3, color: "white" }}>
+        <Card sx={{ backgroundColor: "#263238", boxShadow: 3, borderRadius: 3 }}>
           <CardContent>
-            <Typography variant="h6">Total Students</Typography>
-            <Typography variant="h4">{count.students}</Typography>
+            <Typography variant="h6" sx={{ color: "#ff9800" }}>Total Students</Typography>
+            <Typography variant="h4" sx={{ color: "#eceff1" }}>{count.students}</Typography>
           </CardContent>
         </Card>
       </Grid>
