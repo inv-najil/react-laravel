@@ -70,8 +70,8 @@ export default function DashboardLayout({ children }) {
                     zIndex: 1300,
                     ml: open ? `${drawerWidth}px` : 0,
                     transition: "margin 0.3s ease",
-                    bgcolor: "#9ECAD6",
-                    color: "black",
+                    bgcolor: "#1976d2",
+                    color: "white",
                 }}
             >
                 <Toolbar>
@@ -91,7 +91,7 @@ export default function DashboardLayout({ children }) {
 
 
             <Drawer
-                variant="persistent"
+                variant="temporary"
                 open={open}
                 sx={{
                     width: drawerWidth,
@@ -100,8 +100,8 @@ export default function DashboardLayout({ children }) {
                         width: drawerWidth,
                         boxSizing: "border-box",
                         transition: "width 0.3s ease",
-                        bgcolor: "#748DAE",
-                        color: "white",
+                        bgcolor: "#263238",
+                        color: "#eceff1",
                     },
 
                 }}

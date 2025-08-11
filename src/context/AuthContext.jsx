@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const authData = getStoredUser();
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
       setUser(authData.user);
       setToken(authData.access);
     }
+    setLoading(false);
   }, []);
 
   const login = ({ user, token }) => {
@@ -27,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     logoutUser();
     setUser(null);
     setToken(null);
-  
+
   };
 
   const value = {
@@ -36,6 +38,7 @@ export const AuthProvider = ({ children }) => {
     role: user?.role || null,
     isAuthenticated: !!token,
     login,
+    loading,
     logout,
   };
 
