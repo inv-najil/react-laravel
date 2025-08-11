@@ -58,7 +58,13 @@ export default function EditStudent() {
                                     shrink: true,
                                 }
                             }}
-                            {...register("first_name", { required: "First name is required" })}
+                            {...register("first_name", {
+                                required: "First name is required",
+                                pattern: {
+                                    value: /^[a-zA-Z]{2,}$/,
+                                    message: "Name must be alphabets atleast 2 characters"
+                                },
+                            })}
                             error={!!errors.first_name}
                             helperText={errors.first_name?.message}
                             margin="normal"
@@ -73,7 +79,13 @@ export default function EditStudent() {
                                     shrink: true,
                                 }
                             }}
-                            {...register("last_name", { required: "Last name is required" })}
+                            {...register("last_name", {
+                                required: "Last name is required",
+                                pattern: {
+                                    value: /^[a-zA-Z]{2,}$/,
+                                    message: "Name must be alphabets atleast 2 characters"
+                                },
+                            })}
                             error={!!errors.last_name}
                             helperText={errors.last_name?.message}
                             margin="normal"
