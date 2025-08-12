@@ -55,7 +55,7 @@ export default function AssingnedStudent() {
                 <Typography variant="h4" sx={{ color: "#ff9800", fontWeight: "bold" }} gutterBottom>
                     Students
                 </Typography>
-                <TableContainer>
+                <TableContainer sx={{ overflowX: "auto" }}>
                     <Table>
                         <TableHead>
                             <TableRow>

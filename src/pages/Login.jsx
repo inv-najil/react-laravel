@@ -31,7 +31,7 @@ export default function Login() {
                 </Typography>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Grid container spacing={2} direction="column">
+                    <Grid container spacing={1} direction="column">
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
