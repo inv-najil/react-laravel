@@ -60,6 +60,8 @@ export default function AssingnedStudent() {
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Name</TableCell>
+                                <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Email</TableCell>
+                                <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Phone</TableCell>
                                 <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Roll Number</TableCell>
                                 <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Class</TableCell>
                                 <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Actions</TableCell>
@@ -69,6 +71,8 @@ export default function AssingnedStudent() {
                             {students.map(student => (
                                 <TableRow key={student.id}>
                                     <TableCell sx={{ color: "#eceff1" }}>{student.first_name} {student.last_name}</TableCell>
+                                    <TableCell sx={{ color: "#eceff1" }}>{student.email}</TableCell>
+                                    <TableCell sx={{ color: "#eceff1" }}>{student.phone}</TableCell>
                                     <TableCell sx={{ color: "#eceff1" }}>{student.roll_num}</TableCell>
                                     <TableCell sx={{ color: "#eceff1" }}>{student.class_grade}</TableCell>
                                     <TableCell>
