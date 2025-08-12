@@ -179,6 +179,14 @@ export default function RegisterTeacher() {
                             }}
                             {...register("date_of_joining", {
                                 required: " Date of joining is required",
+                                validate: (val) => {
+                                    const joining = new Date(val);
+                                    const today = new Date();
+                                    if (joining > today) {
+                                        return "Date of joining can not be in future"
+                                    }
+                                    return true;
+                                }
                             })}
                             error={!!errors.date_of_joining}
                             helperText={errors.date_of_joining?.message}
@@ -200,7 +208,7 @@ export default function RegisterTeacher() {
                             <MenuItem value="inactive">Inactive</MenuItem>
                         </TextField>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sm={6}>
                         <Button type="submit" variant="contained" sx={{ mt: 2 }}>
                             Register Teacher
                         </Button>

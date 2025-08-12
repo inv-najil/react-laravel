@@ -25,6 +25,8 @@ export default function RegisterStudent() {
     const password = watch("password");
     const [serverError, setServerError] = useState({});
 
+
+
     useEffect(() => {
         getAllTeachers()
             .then((res) => {
@@ -59,6 +61,7 @@ export default function RegisterStudent() {
             }
         }
     };
+
     return (
         <Container maxWidth="md">
             <Typography variant="h5" sx={{ fontWeight: "bold", color: "#ff9800" }} gutterBottom>
@@ -192,7 +195,17 @@ export default function RegisterStudent() {
                                     shrink: true,
                                 }
                             }}
-                            {...register("dob", { required: "Date of birth is required" })}
+                            {...register("dob", {
+                                required: "Date of birth is required",
+                                validate: (val) => {
+                                    const dob_val = new Date(val);
+                                    const today = new Date();
+                                    if (dob_val >= today) {
+                                        return "Date of Birth canot be in future";
+                                    }
+                                    return true;
+                                }
+                            })}
                             error={!!errors.dob}
                             helperText={errors.dob?.message}
                             margin="normal"
@@ -210,6 +223,18 @@ export default function RegisterStudent() {
                             }}
                             {...register("admission_date", {
                                 required: "Admission date is required",
+                                validate: (val) => {
+                                    const admission_val = new Date(val);
+                                    const dob_val = new Date(watch("dob"));
+                                    const today = new Date();
+                                    if (admission_val > today) {
+                                        return "Admission date Can not be in future";
+                                    }
+                                    if (dob_val && admission_val <= dob_val) {
+                                        return "Admission can not be before dob"
+                                    }
+                                    return true;
+                                }
                             })}
                             error={!!errors.admission_date}
                             helperText={errors.admission_date?.message}
@@ -217,7 +242,7 @@ export default function RegisterStudent() {
                         />
                     </Grid>
                     <Box sx={{ minWidth: 200 }}>
-                        <Grid item>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 select
                                 fullWidth
@@ -255,8 +280,8 @@ export default function RegisterStudent() {
                             <MenuItem value="inactive">Inactive</MenuItem>
                         </TextField>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Button type="submit" variant="contained" sx={{mt:3.5}}>
+                    <Grid item xs={12} sm={6}>
+                        <Button type="submit" variant="contained" sx={{ mt: 3.5 }}>
                             Register Student
                         </Button>
                     </Grid>
