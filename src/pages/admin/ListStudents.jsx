@@ -62,14 +62,18 @@ export default function Students() {
                 Students List
             </Typography>
 
-            <TableContainer  sx={{ backgroundColor: "#263238", overflowX: "auto" }}>
+            <TableContainer sx={{ backgroundColor: "#263238", overflowX: "auto" }}>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>First Name</TableCell>
                             <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Last Name</TableCell>
-                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Roll No</TableCell>
                             <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Email</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Phone</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Roll No</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Class</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Date of Birth</TableCell>
+                            <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Admission Date</TableCell>
                             <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Teacher ID</TableCell>
                             <TableCell sx={{ color: "#ff9800", fontWeight: "bold" }}>Actions</TableCell>
                         </TableRow>
@@ -79,8 +83,12 @@ export default function Students() {
                             <TableRow key={student.id}>
                                 <TableCell sx={{ color: "#eceff1" }}>{student.first_name}</TableCell>
                                 <TableCell sx={{ color: "#eceff1" }}>{student.last_name}</TableCell>
-                                <TableCell sx={{ color: "#eceff1" }}>{student.roll_num}</TableCell>
                                 <TableCell sx={{ color: "#eceff1" }}>{student.email}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.phone}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.roll_num}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.class_grade}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.dob}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{student.admission_date}</TableCell>
                                 <TableCell sx={{ color: "#eceff1" }}>{student.teacher_id}</TableCell>
                                 <TableCell>
                                     <Tooltip title="Edit">
@@ -99,7 +107,6 @@ export default function Students() {
                     </TableBody>
                 </Table>
             </TableContainer>
-
             <Box display="flex" justifyContent="center" sx={{ mt: 3 }}>
                 <Pagination
                     count={totalPages}

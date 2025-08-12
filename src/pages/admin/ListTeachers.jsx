@@ -66,8 +66,10 @@ export default function Teachers() {
                         <TableRow>
                             <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>First Name</TableCell>
                             <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Last Name</TableCell>
-                            <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Emp No</TableCell>
                             <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Email</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Phone Number</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Emp No</TableCell>
+                            <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Joining Date</TableCell>
                             <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Subject</TableCell>
                             <TableCell sx={{ fontWeight: "bold", color: "#ff9800" }}>Actions</TableCell>
                         </TableRow>
@@ -77,8 +79,10 @@ export default function Teachers() {
                             <TableRow key={teacher.id}>
                                 <TableCell sx={{ color: "#eceff1" }}>{teacher.first_name}</TableCell>
                                 <TableCell sx={{ color: "#eceff1" }}>{teacher.last_name}</TableCell>
-                                <TableCell sx={{ color: "#eceff1" }}>{teacher.emp_id}</TableCell>
                                 <TableCell sx={{ color: "#eceff1" }}>{teacher.email}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{teacher.phone}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{teacher.emp_id}</TableCell>
+                                <TableCell sx={{ color: "#eceff1" }}>{teacher.date_of_joining}</TableCell>
                                 <TableCell sx={{ color: "#eceff1" }}>{teacher.subject_specialization}</TableCell>
 
                                 <TableCell>
