@@ -9,7 +9,9 @@ import {
     Typography,
     Pagination,
     IconButton,
-    Tooltip
+    Tooltip,
+    Card,
+    CardContent
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -62,7 +64,12 @@ export default function Students() {
                 Students List
             </Typography>
 
-            <TableContainer sx={{ backgroundColor: "#263238", overflowX: "auto" }}>
+            <TableContainer sx={{
+                backgroundColor: "#263238",
+                overflowX: "auto",
+                maxWidth: "100%",
+                display: { xs: "none", md: "block" }
+            }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -107,6 +114,39 @@ export default function Students() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Box sx={{ display: { xs: "block", md: "none" } }}>
+                {students.map(student => (
+                    <Card
+                        key={student.id}
+                        sx={{ mb: 2, backgroundColor: "#263238", color: "#eceff1" }}
+                    >
+                        <CardContent>
+                            <Typography variant="h6">
+                                {student.first_name} {student.last_name}
+                            </Typography>
+                            <Typography>Email: {student.email}</Typography>
+                            <Typography>Phone: {student.phone}</Typography>
+                            <Typography>Roll No: {student.roll_num}</Typography>
+                            <Typography>Class: {student.class_grade}</Typography>
+                            <Typography>DOB: {student.dob}</Typography>
+                            <Typography>Admission: {student.admission_date}</Typography>
+                            <Typography>Teacher Assigned: {student.teacher_id}</Typography>
+                            <Box sx={{ mt: 1 }}>
+                                <Tooltip title="Edit">
+                                    <IconButton onClick={() => navigate(`/admin/students/edit/${student.id}`)} sx={{ color: "#eceff1" }}>
+                                        <EditIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Delete">
+                                    <IconButton onClick={() => handleDelete(student.id)} sx={{ color: "#eceff1" }}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                ))}
+            </Box>
             <Box display="flex" justifyContent="center" sx={{ mt: 3 }}>
                 <Pagination
                     count={totalPages}

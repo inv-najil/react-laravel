@@ -9,7 +9,9 @@ import {
     Typography,
     Pagination,
     IconButton,
-    Tooltip
+    Tooltip,
+    Card,
+    CardContent
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,6 +19,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import { deleteTeacher } from "../../api/authService";
+import Students from "./ListStudents";
 export default function Teachers() {
     const navigate = useNavigate();
     const [teachers, setTeachers] = useState([]);;
@@ -60,7 +63,11 @@ export default function Teachers() {
                 Teachers List
             </Typography>
 
-            <TableContainer sx={{ overflowX: "auto", backgroundColor: "#263238" }}>
+            <TableContainer sx={{
+                overflowX: "auto",
+                backgroundColor: "#263238",
+                display: { xs: "none", md: "block" }
+            }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -102,7 +109,35 @@ export default function Teachers() {
                     </TableBody>
                 </Table>
             </TableContainer>
-
+            <Box sx={{ display: { xs: "block", md: "none" } }}>
+                {teachers.map(teacher => (
+                    <Card
+                        key={teacher.id}
+                        sx={{ mb: 2, backgroundColor: "#263238", color: "#eceff1" }}
+                    >
+                        <CardContent>
+                            <Typography variant="h6">{teacher.first_name} {teacher.last_name}</Typography>
+                            <Typography>Email: {teacher.email}</Typography>
+                            <Typography>Phone: {teacher.phone}</Typography>
+                            <Typography>Employee Id: {teacher.emp_id}</Typography>
+                            <Typography>Subject: {teacher.subject_specialization}</Typography>
+                            <Typography>Joining Date: {teacher.date_of_joining}</Typography>
+                            <Box sx={{ mt: 1 }}>
+                                <Tooltip title="Edit">
+                                    <IconButton onClick={() => navigate(`/admin/teachers/edit/${teacher.id}`)} sx={{ color: "#eceff1" }}>
+                                        <EditIcon />
+                                    </IconButton>
+                                </Tooltip>
+                                <Tooltip title="Delete">
+                                    <IconButton onClick={() => handleDelete(teacher.id)} sx={{ color: "#eceff1" }}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                ))}
+            </Box>
             <Box display="flex" justifyContent="center" sx={{ mt: 3 }}>
                 <Pagination
                     count={totalPages}
