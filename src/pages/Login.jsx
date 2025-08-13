@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Container, Paper, Grid } from "@mui/material";
 import { loginAPI } from "../api/authService";
-import { getStoredUser } from "../utils/auth";
 import { useAuth } from "../context/AuthContext";
 export default function Login() {
     const navigate = useNavigate();
@@ -24,8 +23,8 @@ export default function Login() {
         }
     };
     return (
-        <Container maxWidth="md">
-            <Paper elevation={5} sx={{ p: 4, mt: 8 }}>
+        <Container maxWidth="md" >
+            <Paper elevation={5} sx={{ p: 4, mt: 8, }}>
                 <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: "bold", color: "#1976d2" }}>
                     Login
                 </Typography>
