@@ -15,7 +15,7 @@ import {
     Alert
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteStudent, getTeacherProfile, getTeacherStudents } from "../../api/authService";
@@ -111,7 +111,7 @@ export default function AssingnedStudent() {
                                     </Tooltip>
                                     <Tooltip title="Delete">
                                         <IconButton onClick={() => handleDelete(student.id)} sx={{ color: "#eceff1" }}>
-                                            <DeleteIcon />
+                                            <PersonRemoveOutlinedIcon />
                                         </IconButton>
                                     </Tooltip>
                                 </TableCell>
@@ -145,7 +145,7 @@ export default function AssingnedStudent() {
                                 </Tooltip>
                                 <Tooltip title="Delete">
                                     <IconButton onClick={() => handleDelete(student.id)} sx={{ color: "#eceff1" }}>
-                                        <DeleteIcon />
+                                        <PersonRemoveOutlinedIcon />
                                     </IconButton>
                                 </Tooltip>
                             </Box>

@@ -16,7 +16,7 @@ import {
     Alert
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
@@ -122,7 +122,7 @@ export default function Students() {
                                     </Tooltip>
                                     <Tooltip title="Delete">
                                         <IconButton onClick={() => handleDelete(student.id)} sx={{ color: "#eceff1" }}>
-                                            <DeleteIcon />
+                                            <PersonRemoveOutlinedIcon />
                                         </IconButton>
                                     </Tooltip>
                                 </TableCell>
@@ -156,7 +156,7 @@ export default function Students() {
                                 </Tooltip>
                                 <Tooltip title="Delete">
                                     <IconButton onClick={() => handleDelete(student.id)} sx={{ color: "#eceff1" }}>
-                                        <DeleteIcon />
+                                        <PersonRemoveOutlinedIcon />
                                     </IconButton>
                                 </Tooltip>
                             </Box>
