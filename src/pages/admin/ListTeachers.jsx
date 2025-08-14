@@ -11,7 +11,9 @@ import {
     IconButton,
     Tooltip,
     Card,
-    CardContent
+    CardContent,
+    Snackbar,
+    Alert
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -19,7 +21,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import { deleteTeacher } from "../../api/authService";
-import Students from "./ListStudents";
 export default function Teachers() {
     const navigate = useNavigate();
     const [teachers, setTeachers] = useState([]);;
@@ -27,6 +28,19 @@ export default function Teachers() {
     const [searchParams, setSearchParams] = useSearchParams();
     const page = parseInt(searchParams.get("page")) || 1;
     const pageSize = 10;
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: "",
+        severity: "success"
+    });
+    const showSnackbar = (message, severity = "success") => {
+        setSnackbar({
+            open: true,
+            message,
+            severity
+        })
+    }
+
     useEffect(() => {
         API.get(`/teachers?page=${page}`)
             .then(res => {
@@ -35,7 +49,7 @@ export default function Teachers() {
             })
             .catch(err => {
                 console.error("Failed to fetch", err);
-                alert("Failed to list Teachers");
+                showSnackbar("Failed to fetch teacher", "error")
                 setTeachers([]);
             })
     }, [page]);
@@ -49,10 +63,11 @@ export default function Teachers() {
         try {
             await deleteTeacher(id);
             setTeachers(prev => prev.filter(teacher => teacher.id != id));
+            showSnackbar("Teacher deleted successfully", "success");
         }
         catch (err) {
             console.error("Failed to delte", err);
-            alert("Failed to delete");
+            showSnackbar("Failed to delte Teacher", "error");
         }
     };
 
@@ -146,6 +161,21 @@ export default function Teachers() {
                     color="primary"
                 />
             </Box>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={5000}
+                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+                <Alert
+                    onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                    severity={snackbar.severity}
+                    variant="filled"
+                    sx={{ maxWidth: "100%" }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Box>
     );
 }

@@ -20,28 +20,33 @@ export default function AdminDashboard() {
       })
   }, [])
   return (
-    <Grid container
-      direction="row"
-      spacing={3}
-      sx={{
-        justifyContent: "flex-start",
-      }}>
-      <Grid item xs={6}>
-        <Card sx={{ backgroundColor: "#263238", boxShadow: 3, borderRadius: 3 }}>
-          <CardContent>
-            <Typography variant="h6" sx={{ color: "#ff9800" }}>Total Teacher</Typography>
-            <Typography variant="h4" sx={{ color: "#eceff1" }}>{count.teachers}</Typography>
-          </CardContent>
-        </Card>
+    <>
+      <Typography variant="h4" sx={{ fontWeight: "bold", color: "#ff9800", mb:3 }}>
+        Welcome, Admin
+      </Typography>
+      <Grid container
+        direction="row"
+        spacing={3}
+        sx={{
+          justifyContent: "flex-start",
+        }}>
+        <Grid item xs={6}>
+          <Card sx={{ backgroundColor: "#263238", boxShadow: 3, borderRadius: 3 }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ color: "#ff9800" }}>Total Teacher</Typography>
+              <Typography variant="h4" sx={{ color: "#eceff1" }}>{count.teachers}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={6}>
+          <Card sx={{ backgroundColor: "#263238", boxShadow: 3, borderRadius: 3 }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ color: "#ff9800" }}>Total Students</Typography>
+              <Typography variant="h4" sx={{ color: "#eceff1" }}>{count.students}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
-      <Grid item xs={6}>
-        <Card sx={{ backgroundColor: "#263238", boxShadow: 3, borderRadius: 3 }}>
-          <CardContent>
-            <Typography variant="h6" sx={{ color: "#ff9800" }}>Total Students</Typography>
-            <Typography variant="h4" sx={{ color: "#eceff1" }}>{count.students}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    </Grid>
+    </>
   );
 }

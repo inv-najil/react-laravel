@@ -3,9 +3,11 @@ import {
     TextField,
     Button,
     Typography,
-    Grid
+    Grid,
+    Snackbar,
+    Alert
 } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { getTeacherById, updateTeacher } from "../../api/authService";
@@ -19,6 +21,19 @@ export default function EditTeacher() {
         reset,
         formState: { errors }
     } = useForm();
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: "",
+        severity: "success"
+    });
+
+    const showSnackbar = (message, severity = "success") => {
+        setSnackbar({
+            open: true,
+            message,
+            severity
+        })
+    };
 
     useEffect(() => {
         getTeacherById(id)
@@ -27,18 +42,18 @@ export default function EditTeacher() {
             })
             .catch(err => {
                 console.error("Failed to fetch", err);
-                alert("Failed to fetch teacher");
+                showSnackbar("Failed to Fetch Teacher", "error")
             })
     }, [id, reset]);
 
     const onSubmit = async (data) => {
         try {
             await updateTeacher(id, data);
-            alert("Teacher updated");
+            showSnackbar("Teacher Updated successfully", "success");
             navigate("/admin/list-teachers");
         } catch (err) {
             console.error("Failed to update", err);
-            alert("Update failed");
+            showSnackbar("Failed to Update Teacher", "error");
         }
     };
     return (
@@ -151,6 +166,21 @@ export default function EditTeacher() {
                     </Grid>
                 </Grid>
             </form>
+            <Snackbar
+                open={snackbar.open}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                autoHideDuration={5000}
+                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+            >
+                <Alert
+                    severity={snackbar.severity}
+                    variant="filled"
+                    onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                    sx={{ maxWidth: "100%" }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Container>
     );
 }

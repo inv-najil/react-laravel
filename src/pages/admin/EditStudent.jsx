@@ -3,9 +3,10 @@ import {
     TextField,
     Button,
     Typography,
-    Grid
+    Grid,
+    Snackbar
 } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStudentByID, updateStudent } from "../../api/authService";
@@ -13,13 +14,24 @@ import { getStudentByID, updateStudent } from "../../api/authService";
 export default function EditStudent() {
     const { id } = useParams();
     const navigate = useNavigate();
-
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors }
     } = useForm();
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: "",
+        severity: "success"
+    });
+    const showSnackbar = (message, severity = "success") => {
+        setSnackbar({
+            open: true,
+            message,
+            severity
+        })
+    };
 
     useEffect(() => {
         getStudentByID(id)
@@ -28,18 +40,18 @@ export default function EditStudent() {
             })
             .catch(err => {
                 console.error("Failed to fetch ", err);
-                alert("could not load student data");
+                showSnackbar("Failed to Load Student data", "error");
             });
     }, [id, reset]);
 
     const onSubmit = async (data) => {
         try {
             await updateStudent(id, data);
-            alert("student Updated");
+            showSnackbar("Student Updated Successfully", "success");
             navigate("/admin/list-students");
         } catch (err) {
             console.error("update failed", err);
-            alert("Failed to update student");
+            showSnackbar("Failed to Update Student", "error")
         }
     };
     return (
@@ -152,6 +164,21 @@ export default function EditStudent() {
                     </Grid>
                 </Grid>
             </form>
+            <Snackbar
+                open={snackbar.open}
+                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                autoHideDuration={5000}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+                <Alert
+                    onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                    severity={snackbar.severity}
+                    variant="filled"
+                    sx={{ maxWidth: "100%" }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Container>
     );
 }
