@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Container, Paper, Grid } from "@mui/material";
+import { TextField, Button, Typography, Container, Paper, Grid, Snackbar, Alert } from "@mui/material";
 import { loginAPI } from "../api/authService";
 import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
 export default function Login() {
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -11,6 +12,19 @@ export default function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: "",
+        severity: "success"
+    });
+
+    const showSnackbar = (message, severity = "success") => {
+        setSnackbar({
+            open: true,
+            message,
+            severity
+        })
+    }
 
     const onSubmit = async (formData) => {
         try {
@@ -19,7 +33,7 @@ export default function Login() {
             login({ user, token });
             navigate(`/${role}`);
         } catch (err) {
-            alert("Invalid email or password");
+            showSnackbar("Invalid Email or password", "Error")
         }
     };
     return (
@@ -77,6 +91,21 @@ export default function Login() {
                         </Grid>
                     </Grid>
                 </form>
+                <Snackbar
+                    onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                    severity={snackbar.severity}
+                    variant="filled"
+                    sx={{ maxWidth: "100%" }}
+                >
+                    <Alert
+                        onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                        severity={snackbar.severity}
+                        variant="filled"
+                        sx={{ maxWidth: "100%" }}
+                    >
+                        {snackbar.message}
+                    </Alert>
+                </Snackbar>
             </Paper>
         </Container>
     );
