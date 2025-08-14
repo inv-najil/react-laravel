@@ -1,19 +1,29 @@
 import axios from "axios";
 import { getStoredUser } from "../utils/auth";
 
+
+let globalLoadingSetter;
+export const registerLoadingSetter = (fn) => {
+    globalLoadingSetter = fn;
+};
+
 const API = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 API.interceptors.request.use(
     (config) => {
+        globalLoadingSetter?.(true);
         const user = getStoredUser();
         if (user?.access) {
             config.headers.Authorization = `Bearer ${user.access}`;
         }
         return config;
     },
-    (error) => Promise.reject(error)
+    (error) => {
+        globalLoadingSetter?.(false);
+        Promise.reject(error);
+    }
 );
 
 let isRefreshing = false;
@@ -28,8 +38,12 @@ const processQueue = (error, token = null) => {
 };
 
 API.interceptors.response.use(
-    (response) => response,
+    (response) => {
+        globalLoadingSetter?.(false);
+        return response;
+    },
     async (error) => {
+        globalLoadingSetter?.(false);
         const originalRequest = error.config;
         const user = getStoredUser();
 
