@@ -18,7 +18,9 @@ export default function RegisterTeacher() {
         handleSubmit,
         formState: { errors },
         watch
-    } = useForm();
+    } = useForm({
+        mode: "onBlur"
+    });
     const password = watch("password")
     const navigate = useNavigate();
     const [serverError, setServerError] = useState({});

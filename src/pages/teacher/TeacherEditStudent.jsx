@@ -34,7 +34,9 @@ export default function TeacherEditStudent() {
         handleSubmit,
         reset,
         formState: { errors }
-    } = useForm();
+    } = useForm({
+        mode: "onBlur"
+    });
 
     useEffect(() => {
         getStudentByID(id)
