@@ -20,7 +20,9 @@ export default function EditTeacher() {
         handleSubmit,
         reset,
         formState: { errors }
-    } = useForm();
+    } = useForm({
+        mode: "onBlur"
+    });
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: "",
@@ -50,9 +52,9 @@ export default function EditTeacher() {
         try {
             await updateTeacher(id, data);
             showSnackbar("Teacher Updated successfully", "success");
-            setTimeout(()=>{
+            setTimeout(() => {
                 navigate("/admin/list-teachers");
-            },1500);
+            }, 1500);
         } catch (err) {
             console.error("Failed to update", err);
             showSnackbar("Failed to Update Teacher", "error");

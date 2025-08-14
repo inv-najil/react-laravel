@@ -19,7 +19,9 @@ export default function EditStudent() {
         handleSubmit,
         reset,
         formState: { errors }
-    } = useForm();
+    } = useForm({
+        mode: "onBlur"
+    });
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: "",
