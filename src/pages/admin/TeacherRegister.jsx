@@ -47,7 +47,7 @@ export default function RegisterTeacher() {
             setServerError({});
             setTimeout(() => {
                 navigate("/admin");
-            }, 2000);
+            }, 1500);
         } catch (err) {
             const message = err.response?.data?.message?.toLowerCase();
             if (message?.includes("email")) {

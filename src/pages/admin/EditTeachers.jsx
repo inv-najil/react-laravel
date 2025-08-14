@@ -50,7 +50,9 @@ export default function EditTeacher() {
         try {
             await updateTeacher(id, data);
             showSnackbar("Teacher Updated successfully", "success");
-            navigate("/admin/list-teachers");
+            setTimeout(()=>{
+                navigate("/admin/list-teachers");
+            },1500);
         } catch (err) {
             console.error("Failed to update", err);
             showSnackbar("Failed to Update Teacher", "error");

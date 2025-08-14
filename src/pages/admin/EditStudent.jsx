@@ -48,7 +48,9 @@ export default function EditStudent() {
         try {
             await updateStudent(id, data);
             showSnackbar("Student Updated Successfully", "success");
-            navigate("/admin/list-students");
+            setTimeout(() => {
+                navigate("/admin/list-students");
+            }, 1500);
         } catch (err) {
             console.error("update failed", err);
             showSnackbar("Failed to Update Student", "error")

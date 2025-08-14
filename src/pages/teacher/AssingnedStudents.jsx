@@ -10,7 +10,9 @@ import {
     TableCell,
     IconButton,
     Tooltip,
-    Box
+    Box,
+    Snackbar,
+    Alert
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -21,6 +23,19 @@ import { deleteStudent, getTeacherProfile, getTeacherStudents } from "../../api/
 export default function AssingnedStudent() {
     const navigate = useNavigate();
     const [students, setStudents] = useState([]);
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: "",
+        severity: "success"
+    });
+
+    const showSnackbar = (message, severity = "success") => {
+        setSnackbar({
+            open: true,
+            message,
+            severity
+        })
+    }
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,7 +46,7 @@ export default function AssingnedStudent() {
             }
             catch (error) {
                 console.log("failed to fetch", error);
-                alert("Failed to fetch")
+                showSnackbar("Failed to fetch profile", "error");
             }
         };
         fetchData();
@@ -42,10 +57,11 @@ export default function AssingnedStudent() {
         try {
             await deleteStudent(id);
             setStudents(prev => prev.filter(student => student.id != id));
+            showSnackbar("Student deleted Sucessfully", "success");
         }
         catch (error) {
             console.error("Failed to delete the student", error);
-            alert("failed to delete")
+            showSnackbar("Failed to delete student");
         }
     };
     return (
@@ -137,6 +153,21 @@ export default function AssingnedStudent() {
                     </Card>
                 ))}
             </Box>
+            <Snackbar
+                open={snackbar.open}
+                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
+                autoHideDuration={5000}
+                anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+                <Alert
+                    onClose={() => { setSnackbar({ ...snackbar, opne: false }) }}
+                    severity={snackbar.severity}
+                    variant="filled"
+                    sx={{ maxWidth: "100%" }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Box>
     );
 }
