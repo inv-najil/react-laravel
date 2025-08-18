@@ -12,8 +12,6 @@ import {
     Tooltip,
     Card,
     CardContent,
-    Snackbar,
-    Alert
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
@@ -21,6 +19,8 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import { deleteTeacher } from "../../api/authService";
+import useSnackbar from "../../hooks/useSnackbar";
+
 export default function Teachers() {
     const navigate = useNavigate();
     const [teachers, setTeachers] = useState([]);;
@@ -28,18 +28,8 @@ export default function Teachers() {
     const [searchParams, setSearchParams] = useSearchParams();
     const page = parseInt(searchParams.get("page")) || 1;
     const pageSize = 10;
-    const [snackbar, setSnackbar] = useState({
-        open: false,
-        message: "",
-        severity: "success"
-    });
-    const showSnackbar = (message, severity = "success") => {
-        setSnackbar({
-            open: true,
-            message,
-            severity
-        })
-    }
+
+    const {showSnackbar, SnackbarComponent} = useSnackbar();
 
     useEffect(() => {
         API.get(`/teachers?page=${page}`)
@@ -161,21 +151,7 @@ export default function Teachers() {
                     color="primary"
                 />
             </Box>
-            <Snackbar
-                open={snackbar.open}
-                autoHideDuration={5000}
-                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            >
-                <Alert
-                    onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-                    severity={snackbar.severity}
-                    variant="filled"
-                    sx={{ maxWidth: "100%" }}
-                >
-                    {snackbar.message}
-                </Alert>
-            </Snackbar>
+            {SnackbarComponent}
         </Box>
     );
 }

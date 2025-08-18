@@ -11,31 +11,19 @@ import {
     IconButton,
     Tooltip,
     Box,
-    Snackbar,
-    Alert
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteStudent, getTeacherProfile, getTeacherStudents } from "../../api/authService";
+import useSnackbar from "../../hooks/useSnackbar";
+
 
 export default function AssingnedStudent() {
     const navigate = useNavigate();
     const [students, setStudents] = useState([]);
-    const [snackbar, setSnackbar] = useState({
-        open: false,
-        message: "",
-        severity: "success"
-    });
-
-    const showSnackbar = (message, severity = "success") => {
-        setSnackbar({
-            open: true,
-            message,
-            severity
-        })
-    }
+    const {showSnackbar, SnackbarComponent} = useSnackbar();
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -153,21 +141,7 @@ export default function AssingnedStudent() {
                     </Card>
                 ))}
             </Box>
-            <Snackbar
-                open={snackbar.open}
-                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-                autoHideDuration={5000}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            >
-                <Alert
-                    onClose={() => { setSnackbar({ ...snackbar, opne: false }) }}
-                    severity={snackbar.severity}
-                    variant="filled"
-                    sx={{ maxWidth: "100%" }}
-                >
-                    {snackbar.message}
-                </Alert>
-            </Snackbar>
+            {SnackbarComponent}
         </Box>
     );
 }
