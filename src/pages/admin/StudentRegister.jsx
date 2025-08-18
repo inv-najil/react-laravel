@@ -10,6 +10,11 @@ import {
     IconButton
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import BadgeIcon from '@mui/icons-material/Badge';
+import SchoolIcon from '@mui/icons-material/School';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { registerAPI } from "../../api/authService";
@@ -97,6 +102,13 @@ export default function RegisterStudent() {
                             error={!!errors.email || !!serverError.email}
                             helperText={errors.email?.message || serverError.email}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <EmailIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -113,6 +125,13 @@ export default function RegisterStudent() {
                             error={!!errors.phone}
                             helperText={errors.phone?.message}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PhoneIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -205,6 +224,13 @@ export default function RegisterStudent() {
                             error={!!errors.roll_num || serverError.roll_num}
                             helperText={errors.roll_num?.message || serverError.roll_num}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <BadgeIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -215,6 +241,13 @@ export default function RegisterStudent() {
                             error={!!errors.class_grade}
                             helperText={errors.class_grade?.message}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SchoolIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -284,6 +317,13 @@ export default function RegisterStudent() {
                                 helperText={errors.teacher_id?.message}
                                 margin="normal"
                                 defaultValue=""
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <AccountBoxIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }}
                             >
                                 {teachers.length === 0 ? (
                                     <MenuItem value="" disabled>No teachers found</MenuItem>
@@ -297,6 +337,7 @@ export default function RegisterStudent() {
                             </TextField>
                         </Grid>
                     </Box>
+                    <Box sx={{ minWidth: 200 }}>
                     <Grid item xs={12} sm={6}>
                         <TextField
                             select
@@ -312,6 +353,7 @@ export default function RegisterStudent() {
                             <MenuItem value="inactive">Inactive</MenuItem>
                         </TextField>
                     </Grid>
+                    </Box>
                     <Grid item xs={12} sm={6}>
                         <Button type="submit" variant="contained" sx={{ mt: 3.5 }}>
                             Register Student
