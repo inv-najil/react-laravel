@@ -9,6 +9,10 @@ import {
     IconButton
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import BadgeIcon from '@mui/icons-material/Badge';
+import BookIcon from '@mui/icons-material/Book';
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { registerAPI } from "../../api/authService";
@@ -80,6 +84,13 @@ export default function RegisterTeacher() {
                             error={!!errors.email || !!serverError.email}
                             helperText={errors.email?.message || serverError.email}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <EmailIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -96,6 +107,13 @@ export default function RegisterTeacher() {
                             error={!!errors.phone}
                             helperText={errors.phone?.message}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PhoneIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -152,7 +170,8 @@ export default function RegisterTeacher() {
                                             {showPassword ? <VisibilityOff /> : <Visibility />}
                                         </IconButton>
                                     </InputAdornment>
-                                )
+                                ),
+
                             }}
                         />
                     </Grid>
@@ -188,6 +207,13 @@ export default function RegisterTeacher() {
                             error={!!errors.emp_id || !!serverError.emp_id}
                             helperText={errors.emp_id?.message || serverError.emp_id}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <BadgeIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -198,6 +224,13 @@ export default function RegisterTeacher() {
                             error={!!errors.subject_specialization}
                             helperText={errors.subject_specialization?.message}
                             margin="normal"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <BookIcon fontSize="small" />
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
