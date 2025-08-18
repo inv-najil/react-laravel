@@ -58,7 +58,7 @@ export default function TeacherEditStudent() {
             }, 1500)
         } catch (err) {
             console.error("update failed", err);
-            alert("Failed to update student");
+            showSnackbar("Failed to update Student", "error");
         }
     };
     return (

@@ -61,7 +61,7 @@ export default function AssingnedStudent() {
         }
         catch (error) {
             console.error("Failed to delete the student", error);
-            showSnackbar("Failed to delete student");
+            showSnackbar("Failed to delete student", "error");
         }
     };
     return (
