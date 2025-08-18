@@ -84,12 +84,14 @@ export default function RegisterTeacher() {
                             error={!!errors.email || !!serverError.email}
                             helperText={errors.email?.message || serverError.email}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <EmailIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <EmailIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -107,12 +109,14 @@ export default function RegisterTeacher() {
                             error={!!errors.phone}
                             helperText={errors.phone?.message}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <PhoneIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PhoneIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -163,14 +167,16 @@ export default function RegisterTeacher() {
                             error={!!errors.password}
                             helperText={errors.password?.message}
                             margin="normal"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton onClick={handleClickShowPassword} edge="end">
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleClickShowPassword} edge="end">
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }
 
                             }}
                         />
@@ -188,14 +194,16 @@ export default function RegisterTeacher() {
                             error={!!errors.password_confirmation}
                             helperText={errors.password_confirmation?.message}
                             margin="normal"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton onClick={handleClickConfirmPassword} edge="end">
-                                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleClickConfirmPassword} edge="end">
+                                                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -207,12 +215,14 @@ export default function RegisterTeacher() {
                             error={!!errors.emp_id || !!serverError.emp_id}
                             helperText={errors.emp_id?.message || serverError.emp_id}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <BadgeIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <BadgeIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -224,12 +234,14 @@ export default function RegisterTeacher() {
                             error={!!errors.subject_specialization}
                             helperText={errors.subject_specialization?.message}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <BookIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <BookIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>

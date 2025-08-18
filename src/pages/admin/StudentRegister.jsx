@@ -125,12 +125,14 @@ export default function RegisterStudent() {
                             error={!!errors.phone}
                             helperText={errors.phone?.message}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <PhoneIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PhoneIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -181,14 +183,16 @@ export default function RegisterStudent() {
                             error={!!errors.password}
                             helperText={errors.password?.message}
                             margin="normal"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton onClick={handleClickShowPassword} edge="end">
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleClickShowPassword} edge="end">
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -205,14 +209,16 @@ export default function RegisterStudent() {
                             error={!!errors.password_confirmation}
                             helperText={errors.password_confirmation?.message}
                             margin="normal"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton onClick={handleClickConfirmPassword} edge="end">
-                                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleClickConfirmPassword} edge="end">
+                                                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -224,12 +230,14 @@ export default function RegisterStudent() {
                             error={!!errors.roll_num || serverError.roll_num}
                             helperText={errors.roll_num?.message || serverError.roll_num}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <BadgeIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <BadgeIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -241,12 +249,14 @@ export default function RegisterStudent() {
                             error={!!errors.class_grade}
                             helperText={errors.class_grade?.message}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SchoolIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SchoolIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
@@ -317,12 +327,14 @@ export default function RegisterStudent() {
                                 helperText={errors.teacher_id?.message}
                                 margin="normal"
                                 defaultValue=""
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <AccountBoxIcon fontSize="small" />
-                                        </InputAdornment>
-                                    )
+                                slotProps={{
+                                    input: {
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <AccountBoxIcon fontSize="small" />
+                                            </InputAdornment>
+                                        )
+                                    }
                                 }}
                             >
                                 {teachers.length === 0 ? (
@@ -338,21 +350,21 @@ export default function RegisterStudent() {
                         </Grid>
                     </Box>
                     <Box sx={{ minWidth: 200 }}>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            select
-                            fullWidth
-                            label="Status"
-                            defaultValue="active"
-                            {...register("status", { required: "Status is required" })}
-                            error={!!errors.status}
-                            helperText={errors.status?.message}
-                            margin="normal"
-                        >
-                            <MenuItem value="active">Active</MenuItem>
-                            <MenuItem value="inactive">Inactive</MenuItem>
-                        </TextField>
-                    </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                select
+                                fullWidth
+                                label="Status"
+                                defaultValue="active"
+                                {...register("status", { required: "Status is required" })}
+                                error={!!errors.status}
+                                helperText={errors.status?.message}
+                                margin="normal"
+                            >
+                                <MenuItem value="active">Active</MenuItem>
+                                <MenuItem value="inactive">Inactive</MenuItem>
+                            </TextField>
+                        </Grid>
                     </Box>
                     <Grid item xs={12} sm={6}>
                         <Button type="submit" variant="contained" sx={{ mt: 3.5 }}>
