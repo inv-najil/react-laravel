@@ -102,12 +102,14 @@ export default function RegisterStudent() {
                             error={!!errors.email || !!serverError.email}
                             helperText={errors.email?.message || serverError.email}
                             margin="normal"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <EmailIcon fontSize="small" />
-                                    </InputAdornment>
-                                )
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <EmailIcon fontSize="small" />
+                                        </InputAdornment>
+                                    )
+                                }
                             }}
                         />
                     </Grid>
