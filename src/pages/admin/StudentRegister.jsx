@@ -6,7 +6,10 @@ import {
     MenuItem,
     Grid,
     Box,
+    InputAdornment,
+    IconButton
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { registerAPI } from "../../api/authService";
@@ -28,7 +31,12 @@ export default function RegisterStudent() {
     const navigate = useNavigate();
     const password = watch("password");
     const [serverError, setServerError] = useState({});
-    const {showSnackbar, SnackbarComponent} = useSnackbar();
+    const { showSnackbar, SnackbarComponent } = useSnackbar();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const handleClickShowPassword = () => { setShowPassword((prev) => !prev) };
+    const handleClickConfirmPassword = () => { setShowConfirmPassword((prev) => !prev) };
 
     useEffect(() => {
         getAllTeachers()
@@ -143,7 +151,7 @@ export default function RegisterStudent() {
                         <TextField
                             fullWidth
                             label="Password"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             {...register("password", {
                                 required: "Password is required",
                                 minLength: {
@@ -154,13 +162,22 @@ export default function RegisterStudent() {
                             error={!!errors.password}
                             helperText={errors.password?.message}
                             margin="normal"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={handleClickShowPassword} edge="end">
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
                             fullWidth
                             label="Confirm Password"
-                            type="password"
+                            type={showConfirmPassword ? "text" : "password"}
                             {...register("password_confirmation", {
                                 required: "Please confirm password",
                                 validate: (val) =>
@@ -169,6 +186,15 @@ export default function RegisterStudent() {
                             error={!!errors.password_confirmation}
                             helperText={errors.password_confirmation?.message}
                             margin="normal"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={handleClickConfirmPassword} edge="end">
+                                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>

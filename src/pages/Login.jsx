@@ -1,9 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Container, Paper, Grid } from "@mui/material";
+import { TextField, Button, Typography, Container, Paper, Grid, InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { loginAPI } from "../api/authService";
 import { useAuth } from "../context/AuthContext";
 import useSnackbar from "../hooks/useSnackbar";
+import { useState } from "react";
 export default function Login() {
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -12,6 +14,8 @@ export default function Login() {
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => { setShowPassword((prev) => !prev) };
 
     const { showSnackbar, SnackbarComponent } = useSnackbar();
 
@@ -54,7 +58,7 @@ export default function Login() {
                             <TextField
                                 fullWidth
                                 label="Password"
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 {...register("password", {
                                     required: "Password is required",
                                     minLength: {
@@ -65,6 +69,15 @@ export default function Login() {
                                 error={!!errors.password}
                                 helperText={errors.password?.message}
                                 margin="normal"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleClickShowPassword} edge="end">
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
