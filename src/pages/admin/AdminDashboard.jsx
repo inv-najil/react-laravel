@@ -2,28 +2,16 @@ import {
   Typography,
   Grid,
   Card,
-  CardContent,
-  Snackbar,
-  Alert
+  CardContent
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getTotalCount } from "../../api/authService";
+import useSnackbar from "../../hooks/useSnackbar";
 
 export default function AdminDashboard() {
   const [count, setCount] = useState({ teachers: 0, students: 0 });
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: "",
-    severity: "success"
-  });
 
-  const showSnackbar = (message, severity = "success") => {
-    setSnackbar({
-      open: true,
-      message,
-      severity
-    })
-  };
+  const {showSnackbar, SnackbarComponent} = useSnackbar();
 
   useEffect(() => {
     getTotalCount()
@@ -63,21 +51,7 @@ export default function AdminDashboard() {
           </Card>
         </Grid>
       </Grid>
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={5000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-      >
-        <Alert
-          onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-          severity={snackbar.severity}
-          variant="filled"
-          sx={{ maxWidth: "100%" }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
+      {SnackbarComponent}
     </>
   );
 }

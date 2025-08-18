@@ -2,28 +2,14 @@ import {
   Typography,
   Card,
   CardContent,
-  Snackbar,
-  Alert
-
 } from "@mui/material";
 import { getStudentProfile } from "../../api/authService";
 import { useEffect, useState } from "react";
+import useSnackbar from "../../hooks/useSnackbar";
 
 export default function StudentDashboard() {
   const [student, setStudent] = useState([]);
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: "",
-    severity: "success"
-  });
-
-  const showSnackbar = (message, severity = "success") => {
-    setSnackbar({
-      open: true,
-      message,
-      severity
-    })
-  }
+  const {showSnackbar, SnackbarComponent} = useSnackbar();
 
   useEffect(() => {
     getStudentProfile()
@@ -62,21 +48,7 @@ export default function StudentDashboard() {
           </Typography>
         </CardContent>
       </Card>
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={5000}
-        onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert
-          severity={snackbar.severity}
-          variant="filled"
-          onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-          sx={{ maxWidth: "100%" }}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
+     {SnackbarComponent}
     </>
   );
 }

@@ -4,12 +4,12 @@ import {
     Button,
     Typography,
     Grid,
-    Snackbar
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStudentByID, updateStudent } from "../../api/authService";
+import useSnackbar from "../../hooks/useSnackbar";
 
 export default function EditStudent() {
     const { id } = useParams();
@@ -22,19 +22,7 @@ export default function EditStudent() {
     } = useForm({
         mode: "onBlur"
     });
-    const [snackbar, setSnackbar] = useState({
-        open: false,
-        message: "",
-        severity: "success"
-    });
-    const showSnackbar = (message, severity = "success") => {
-        setSnackbar({
-            open: true,
-            message,
-            severity
-        })
-    };
-
+    const {showSnackbar, SnackbarComponent} = useSnackbar();
     useEffect(() => {
         getStudentByID(id)
             .then(res => {
@@ -168,21 +156,7 @@ export default function EditStudent() {
                     </Grid>
                 </Grid>
             </form>
-            <Snackbar
-                open={snackbar.open}
-                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-                autoHideDuration={5000}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            >
-                <Alert
-                    onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-                    severity={snackbar.severity}
-                    variant="filled"
-                    sx={{ maxWidth: "100%" }}
-                >
-                    {snackbar.message}
-                </Alert>
-            </Snackbar>
+            {SnackbarComponent}
         </Container>
     );
 }

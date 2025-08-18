@@ -5,13 +5,13 @@ import {
     Typography,
     MenuItem,
     Grid,
-    Snackbar,
-    Alert
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { registerAPI } from "../../api/authService";
 import { useNavigate } from "react-router-dom";
+import useSnackbar from "../../hooks/useSnackbar";
+
 export default function RegisterTeacher() {
     const {
         register,
@@ -24,19 +24,7 @@ export default function RegisterTeacher() {
     const password = watch("password")
     const navigate = useNavigate();
     const [serverError, setServerError] = useState({});
-    const [snackbar, setSnackbar] = useState({
-        open: false,
-        message: "",
-        severity: "success"
-    });
-
-    const showSnackbar = (message, severity = "success") => {
-        setSnackbar({
-            open: true,
-            message,
-            severity
-        })
-    };
+    const {showSnackbar, SnackbarComponent} = useSnackbar();
 
     const onSubmit = async (data) => {
         try {
@@ -234,21 +222,7 @@ export default function RegisterTeacher() {
                     </Grid>
                 </Grid>
             </form>
-            <Snackbar
-                open={snackbar.open}
-                autoHideDuration={5000}
-                onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-                anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            >
-                <Alert
-                    onClose={() => { setSnackbar({ ...snackbar, open: false }) }}
-                    severity={snackbar.severity}
-                    variant="filled"
-                    sx={{ maxWidth: "100%" }}
-                >
-                    {snackbar.message}
-                </Alert>
-            </Snackbar>
+           {SnackbarComponent}
         </Container>
     );
 }
