@@ -1,8 +1,8 @@
 import API from "./axios";
 
 export const getStoredUser = () => {
-  const stored = localStorage.getItem("user");
-  return stored ? JSON.parse(stored) : null;
+    const stored = localStorage.getItem("user");
+    return stored ? JSON.parse(stored) : null;
 };
 
 export const loginAPI = (data) => {
@@ -67,4 +67,10 @@ export const getTeacherProfile = () => {
 
 export const getTotalCount = () => {
     return API.get("/admin/dashboard");
+};
+
+export const exportStudent = () => {
+    return API.get("/student/export",{
+        responseType: "blob"
+    });
 };

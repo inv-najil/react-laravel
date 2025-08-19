@@ -12,6 +12,7 @@ import {
     Tooltip,
     Card,
     CardContent,
+    Button,
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
@@ -19,7 +20,7 @@ import PersonOffIcon from '@mui/icons-material/PersonOff';
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
-import { deleteStudent } from "../../api/authService";
+import { deleteStudent, exportStudent } from "../../api/authService";
 import useSnackbar from "../../hooks/useSnackbar";
 
 export default function Students() {
@@ -63,6 +64,23 @@ export default function Students() {
     };
 
     const totalPages = Math.ceil(totalCount / pageSize);
+
+    const handleExport = async () => {
+        try {
+            const response = await exportStudent();
+            const blob = new Blob([response.data], { type: "text/csv" });
+            const url = window.URL.createObjectURL(blob);
+            showSnackbar(
+                <a href={url} download="students.csv" style={{ color: "white" }}>
+                    Click here to download CSV
+                </a>,
+                "success"
+            );
+        } catch (err) {
+            console.error("Failed to export", err);
+            showSnackbar("Failed to export students", "error");
+        }
+    }
     return (
         <Box>
             {students.length === 0 ? (
@@ -85,7 +103,9 @@ export default function Students() {
                     <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold", color: "#ff9800" }}>
                         Students List
                     </Typography>
-
+                    <Button onClick={handleExport}>
+                        Export Students
+                    </Button>
                     <TableContainer sx={{
                         backgroundColor: "#263238",
                         overflowX: "auto",
