@@ -13,6 +13,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import BadgeIcon from '@mui/icons-material/Badge';
 import BookIcon from '@mui/icons-material/Book';
+import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { registerAPI } from "../../api/authService";
@@ -287,7 +288,7 @@ export default function RegisterTeacher() {
                         </TextField>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+                        <Button type="submit" variant="outlined" startIcon={<PersonAddOutlinedIcon />} sx={{ mt: 2 }}>
                             Register Teacher
                         </Button>
                     </Grid>
