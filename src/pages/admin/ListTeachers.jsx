@@ -12,14 +12,16 @@ import {
     Tooltip,
     Card,
     CardContent,
+    Button,
 } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import { Download } from "@mui/icons-material";
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
-import { deleteTeacher } from "../../api/authService";
+import { deleteTeacher, exportTeacher } from "../../api/authService";
 import useSnackbar from "../../hooks/useSnackbar";
 
 export default function Teachers() {
@@ -62,6 +64,23 @@ export default function Teachers() {
         }
     };
 
+    const handleExport = async () => {
+        try {
+            const response = await exportTeacher();
+            const blob = new Blob([response.data], { type: "text/csv" });
+            const url = window.URL.createObjectURL(blob);
+            showSnackbar(
+                <a href={url} download="teachers.csv" style={{ color: "white" }}>
+                    Click Here to download csv
+                </a>, "success"
+            )
+        } catch (err) {
+            console.error("Failed to download", err);
+            showSnackbar("Error in downloading the csv", "error");
+        }
+
+    };
+
     const totalPages = Math.ceil(totalCount / pageSize);
     return (
         <Box>
@@ -85,6 +104,16 @@ export default function Teachers() {
                     <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold", color: "#ff9800" }}>
                         Teachers List
                     </Typography>
+                    <Box display="flex" justifyContent="flex-end" mb={2}>
+                        <Button
+                            variant="outlined"
+                            color="warning"
+                            startIcon={<Download />}
+                            onClick={handleExport}
+                        >
+                            Export Teacher
+                        </Button>
+                    </Box>
 
                     <TableContainer sx={{
                         overflowX: "auto",
