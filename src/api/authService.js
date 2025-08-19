@@ -70,7 +70,13 @@ export const getTotalCount = () => {
 };
 
 export const exportStudent = () => {
-    return API.get("/student/export",{
+    return API.get("/student/export", {
+        responseType: "blob"
+    });
+};
+
+export const exportTeacher = () => {
+    return API.get("/teacher/export", {
         responseType: "blob"
     });
 };
