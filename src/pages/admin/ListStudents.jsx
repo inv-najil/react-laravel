@@ -17,6 +17,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
+import { Download } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
@@ -103,9 +104,15 @@ export default function Students() {
                     <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold", color: "#ff9800" }}>
                         Students List
                     </Typography>
-                    <Button onClick={handleExport}>
-                        Export Students
-                    </Button>
+                    <Box display="flex" justifyContent="flex-end" mb={2}>
+                        <Button variant="outlined"
+                            color="warning"
+                            startIcon={<Download />}
+                            onClick={handleExport}
+                        >
+                            Export Students
+                        </Button>
+                    </Box>
                     <TableContainer sx={{
                         backgroundColor: "#263238",
                         overflowX: "auto",
