@@ -80,3 +80,11 @@ export const exportTeacher = () => {
         responseType: "blob"
     });
 };
+
+export const importStudents = (formData) => {
+    return API.post("/student/import", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+};

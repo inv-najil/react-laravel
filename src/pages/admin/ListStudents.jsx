@@ -18,10 +18,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import { Download } from "@mui/icons-material";
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
-import { deleteStudent, exportStudent } from "../../api/authService";
+import { deleteStudent, exportStudent, importStudents } from "../../api/authService";
 import useSnackbar from "../../hooks/useSnackbar";
 
 export default function Students() {
@@ -29,6 +30,7 @@ export default function Students() {
     const [students, setStudents] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [importing, setImporting] = useState(false);
     const page = parseInt(searchParams.get("page")) || 1;
     const pageSize = 10;
 
@@ -82,6 +84,29 @@ export default function Students() {
             showSnackbar("Failed to export students", "error");
         }
     }
+
+    const handleImport = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            setImporting(true);
+            const response = await importStudents(formData);
+            showSnackbar(response.data.message, "success");
+            const res = await API.get(`/students?page=${page}`);
+            setStudents(res.data.data);
+            setTotalCount(res.data.total);
+        } catch (err) {
+            console.error("Failed to import", err);
+            showSnackbar(err.response?.data?.failures || "Import failed", "error");
+        }
+        finally {
+            setImporting(false);
+            event.target.value = "";
+        }
+    }
     return (
         <Box>
             {students.length === 0 ? (
@@ -104,7 +129,25 @@ export default function Students() {
                     <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold", color: "#ff9800" }}>
                         Students List
                     </Typography>
-                    <Box display="flex" justifyContent="flex-end" mb={2}>
+                    <Box display="flex" justifyContent="space-between" mb={2}>
+                        <input
+                            accept=".csv"
+                            type="file"
+                            id="import-students-file"
+                            style={{ display: "none" }}
+                            onChange={handleImport}
+                        />
+                        <label htmlFor="import-students-file">
+                            <Button
+                                variant="outlined"
+                                component="span"
+                                color="warning"
+                                startIcon={<FileUploadIcon />}
+                                disabled={importing}
+                            >
+                                {importing ? "Importing..." : "Import Students"}
+                            </Button>
+                        </label>
                         <Button variant="outlined"
                             color="warning"
                             startIcon={<Download />}
