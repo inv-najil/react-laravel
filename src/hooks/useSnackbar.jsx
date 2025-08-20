@@ -15,7 +15,7 @@ export default function useSnackbar() {
     const SnackbarComponent = (
         <Snackbar
             open={snackbar.open}
-            autoHideDuration={5000}
+            autoHideDuration={2000}
             onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
