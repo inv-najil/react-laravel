@@ -100,7 +100,7 @@ export default function Students() {
             setTotalCount(res.data.total);
         } catch (err) {
             console.error("Failed to import", err);
-            showSnackbar(err.response?.data?.failures || "Import failed", "error");
+            showSnackbar(response.data.failures || "Import failed", "error");
         }
         finally {
             setImporting(false);

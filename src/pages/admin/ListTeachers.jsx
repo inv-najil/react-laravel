@@ -18,16 +18,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Download } from "@mui/icons-material";
 import PersonRemoveOutlinedIcon from '@mui/icons-material/PersonRemoveOutlined';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
-import { deleteTeacher, exportTeacher } from "../../api/authService";
+import { deleteTeacher, exportTeacher, importTeachers } from "../../api/authService";
 import useSnackbar from "../../hooks/useSnackbar";
 
 export default function Teachers() {
     const navigate = useNavigate();
     const [teachers, setTeachers] = useState([]);;
     const [totalCount, setTotalCount] = useState(0);
+    const [importing, setImporting] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
     const page = parseInt(searchParams.get("page")) || 1;
     const pageSize = 10;
@@ -64,6 +66,8 @@ export default function Teachers() {
         }
     };
 
+    const totalPages = Math.ceil(totalCount / pageSize);
+
     const handleExport = async () => {
         try {
             const response = await exportTeacher();
@@ -81,7 +85,28 @@ export default function Teachers() {
 
     };
 
-    const totalPages = Math.ceil(totalCount / pageSize);
+    const handleImport = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        const formData = new FormData();
+        formData.append("file", file);
+        try {
+            setImporting(true);
+            const response = await importTeachers(formData);
+            showSnackbar(response.data.message, "success");
+            const res = await API.get(`/teachers?page=${page}`);
+            setTeachers(res.data.data);
+            setTotalCount(res.data.total);
+        } catch (err) {
+            console.error("Failed to import", err);
+            showSnackbar(response.data.failures || "Import failed", "error");
+        }
+        finally {
+            setImporting(false);
+            event.target.value = "";
+        }
+    }
+    
     return (
         <Box>
             {teachers.length === 0 ? (
@@ -104,7 +129,26 @@ export default function Teachers() {
                     <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold", color: "#ff9800" }}>
                         Teachers List
                     </Typography>
-                    <Box display="flex" justifyContent="flex-end" mb={2}>
+                    <Box display="flex" justifyContent="space-between" mb={2}>
+                        <input
+                            accept=".csv"
+                            type="file"
+                            id="import-teacher-file"
+                            onChange={handleImport}
+                            style={{ display: "none" }}
+
+                        />
+                        <label htmlFor="import-teacher-file">
+                            <Button
+                                component="span"
+                                variant="outlined"
+                                color="warning"
+                                disabled={importing}
+                                startIcon={<FileUploadIcon />}
+                            >
+                                {importing ? "Importing..." : "Import Teacher"}
+                            </Button>
+                        </label>
                         <Button
                             variant="outlined"
                             color="warning"
