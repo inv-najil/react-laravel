@@ -88,3 +88,11 @@ export const importStudents = (formData) => {
         }
     });
 };
+
+export const importTeachers = (formData) => {
+    return API.post("/teacher/import", formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+};
