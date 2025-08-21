@@ -109,7 +109,17 @@ export default function DashboardLayout({ children }) {
                 <List>
                     {menuItems.map((item) => (
                         <ListItem key={item.path}>
-                            <ListItemButton component={NavLink} to={item.path}>
+                            <ListItemButton component={NavLink} to={item.path} end sx={{
+                                borderRadius: 1,
+                                "&:hover": {
+                                    bgcolor: "#37474F",
+                                },
+                                "&.active": {
+                                    bgcolor: "#37474F",
+                                    fontWeight: "bold",
+                                    color: "#ff9800"
+                                }
+                            }}>
                                 <ListItemText primary={item.label} />
                             </ListItemButton>
                         </ListItem>
