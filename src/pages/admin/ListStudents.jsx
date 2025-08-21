@@ -94,7 +94,19 @@ export default function Students() {
         try {
             setImporting(true);
             const response = await importStudents(formData);
-            showSnackbar(response.data.message, "success");
+            if (response.data.failures && response.data.failures.length > 0) {
+                const errorMessage = response.data.failures.map(f =>
+                    `Row ${f.row}:${f.errors.join(", ")}`).join('/n');
+                showSnackbar(
+                    <>
+                        {response.data.message} <br />
+                        <pre style={{ whiteSpace: "pre-wrap" }}>{errorMessage}</pre>
+                    </>,
+                    "error"
+                );
+            } else {
+                showSnackbar(response.data.message, "success");
+            }
             const res = await API.get(`/students?page=${page}`);
             setStudents(res.data.data);
             setTotalCount(res.data.total);
