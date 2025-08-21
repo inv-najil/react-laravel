@@ -96,7 +96,7 @@ export default function Students() {
             const response = await importStudents(formData);
             if (response.data.failures && response.data.failures.length > 0) {
                 const errorMessage = response.data.failures.map(f =>
-                    `Row ${f.row}:${f.errors.join(", ")}`).join('/n');
+                    `Row ${f.row}:${f.errors.join(", ")}`).join('\n');
                 showSnackbar(
                     <>
                         {response.data.message} <br />
@@ -112,7 +112,7 @@ export default function Students() {
             setTotalCount(res.data.total);
         } catch (err) {
             console.error("Failed to import", err);
-            showSnackbar(response.data.failures || "Import failed", "error");
+            showSnackbar("Import failed", "error");
         }
         finally {
             setImporting(false);

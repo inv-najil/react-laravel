@@ -93,20 +93,32 @@ export default function Teachers() {
         try {
             setImporting(true);
             const response = await importTeachers(formData);
-            showSnackbar(response.data.message, "success");
+            if (response.data.failures && response.data.failures.length > 0) {
+                const errorMessage = response.data.failures.map(f =>
+                    `Row ${f.row}:${f.errors.join(", ")}`).join("\n");
+                showSnackbar(
+                    <>
+                        {response.data.message} <br />
+                        <pre style={{ whiteSpace: "pre-wrap" }}>{errorMessage}</pre>
+                    </>,
+                    "error"
+                );
+            } else {
+                showSnackbar(response.data.message, "success");
+            }
             const res = await API.get(`/teachers?page=${page}`);
             setTeachers(res.data.data);
             setTotalCount(res.data.total);
         } catch (err) {
             console.error("Failed to import", err);
-            showSnackbar(response.data.failures || "Import failed", "error");
+            showSnackbar("Import failed", "error");
         }
         finally {
             setImporting(false);
             event.target.value = "";
         }
     }
-    
+
     return (
         <Box>
             {teachers.length === 0 ? (
